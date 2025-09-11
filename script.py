@@ -4,7 +4,7 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import re
 
-MAX_REPOS       = 2       
+MAX_REPOS       = 5       
 MAX_WORKERS     = 2
 JAVA_MEM        = "4g"
 GIT_TIMEOUT_SEC = 900
@@ -149,6 +149,101 @@ def count_java_files(root: Path) -> int:
         cnt += 1
     return cnt
 
+def loc_breakdown(root: Path) -> dict:
+    totals = {"loc_total_src": 0, "loc_code": 0, "loc_comment": 0, "loc_blank": 0, "comment_pct": None}
+
+    def ignored(p: Path) -> bool:
+        return any(seg.lower() in IGNORE_BASENAMES for seg in p.parts)
+
+    for file in root.rglob("*.java"):
+        if ignored(file): 
+            continue
+        try:
+            with file.open("r", encoding="utf-8", errors="ignore") as f:
+                in_block = False 
+                for line in f:
+                    totals["loc_total_src"] += 1
+                    if not line.strip():
+                        totals["loc_blank"] += 1
+                        continue
+
+                    i = 0
+                    n = len(line)
+                    in_string = False
+                    in_char = False
+                    escape = False
+
+                    has_code = False
+                    has_comment_token = False
+
+                    while i < n:
+                        ch = line[i]
+                        nxt = line[i+1] if i+1 < n else ""
+
+                        if in_string:
+                            if escape: 
+                                escape = False
+                            elif ch == "\\":
+                                escape = True
+                            elif ch == '"':
+                                in_string = False
+                            i += 1
+                            continue
+
+                        if in_char:
+                            if escape: 
+                                escape = False
+                            elif ch == "\\":
+                                escape = True
+                            elif ch == "'":
+                                in_char = False
+                            i += 1
+                            continue
+
+                        if in_block:
+                            has_comment_token = True
+                            if ch == "*" and nxt == "/":
+                                in_block = False
+                                i += 2
+                                continue
+                            i += 1
+                            continue
+
+                        if ch == "/" and nxt == "/":
+                            has_comment_token = True
+                            break
+                        if ch == "/" and nxt == "*":
+                            has_comment_token = True
+                            in_block = True
+                            i += 2
+                            continue
+                        if ch == '"':
+                            in_string = True
+                            i += 1
+                            continue
+                        if ch == "'":
+                            in_char = True
+                            i += 1
+                            continue
+                        if not ch.isspace():
+                            has_code = True
+                        i += 1
+
+                    if has_code:
+                        totals["loc_code"] += 1
+                    elif has_comment_token or in_block:
+                        totals["loc_comment"] += 1
+                    else:
+                        totals["loc_blank"] += 1
+        except Exception:
+            continue
+
+    tot = totals["loc_total_src"]
+    if tot > 0:
+        totals["comment_pct"] = round(100.0 * totals["loc_comment"] / tot, 2)
+    return totals
+
+
 def resolve_ck_paths(out_dir: Path, repo_name: str):
     class_a  = out_dir / "class.csv"
     method_a = out_dir / "method.csv"
@@ -199,14 +294,20 @@ def count_releases(owner_repo: str) -> int | None:
             return int(m.group(1))
     return body_count
 
-# ============== OUTPUT THREAD-SAFE ==============
 write_lock = threading.Lock()
 
 def append_result(row: dict):
     with write_lock:
         file_exists = RESULTS_CSV.exists()
-        fields = ["name","stars","age_years","num_releases","java_files","classes","methods",
-                  "loc_total","cbo_avg","dit_avg","lcom_avg","avg_wmc","url","clone_url","created_at","note"]
+        fields = [
+            "name","stars","age_years","num_releases","java_files",
+            "classes","methods",
+            "loc_total",
+            "loc_total_src","loc_code","loc_comment","loc_blank","comment_pct",
+            "cbo_avg","dit_avg","lcom_avg","avg_wmc",
+            "url","clone_url","created_at","note"
+]
+
         with RESULTS_CSV.open("a", newline='', encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=fields)
             if not file_exists: w.writeheader()
@@ -222,7 +323,6 @@ def already_done() -> set:
                 done.add(row["name"])
     return done
 
-# ============== BUSCAR REPOS ==============
 repositories = []
 for page in range(1, 11):
     data = gh_get(f"https://api.github.com/search/repositories?q=language:Java&sort=stars&order=desc&per_page=100&page={page}")
@@ -258,20 +358,30 @@ def process_repo(repo):
         r = run(["git","clone","--depth","1", repo["clone_url"], str(local_dir)], timeout=GIT_TIMEOUT_SEC)
     except subprocess.TimeoutExpired:
         append_result({**repo,"java_files":0,"classes":0,"methods":0,"loc_total":0,
+                       **breakdown,
                        "cbo_avg":None,"dit_avg":None,"lcom_avg":None,"avg_wmc":None,"note":"git_timeout"})
         return
     if r.returncode != 0:
         append_result({**repo,"java_files":0,"classes":0,"methods":0,"loc_total":0,
+                        **breakdown,
                        "cbo_avg":None,"dit_avg":None,"lcom_avg":None,"avg_wmc":None,"note":"git_clone_failed"})
         return
 
     java_files = count_java_files(local_dir)
+
     if java_files == 0:
-        append_result({**repo,"java_files":0,"classes":0,"methods":0,"loc_total":0,
+        breakdown = {"loc_total_src": 0, "loc_code": 0, "loc_comment": 0, "loc_blank": 0, "comment_pct": None
+                     }
+        append_result({**repo,"java_files":0,"classes":0,"methods":0,"loc_total":0, **breakdown,
                        "cbo_avg":None,"dit_avg":None,"lcom_avg":None,"avg_wmc":None,"note":"no_java_files"})
         if DELETE_REPO_AFTER: shutil.rmtree(local_dir, ignore_errors=True)
         return
-
+    
+    try:
+        breakdown = loc_breakdown(local_dir)
+    except Exception:
+        breakdown = {"loc_total_src": None, "loc_code": None, "loc_comment": None, "loc_blank": None, "comment_pct": None}
+    
     out_dir = CK_OUT_DIR / safe_name(name)
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -281,11 +391,13 @@ def process_repo(repo):
                  str(local_dir), "true", "0", "false", str(out_dir)], timeout=CK_TIMEOUT_SEC)
     except subprocess.TimeoutExpired:
         append_result({**repo,"java_files":java_files,"classes":0,"methods":0,"loc_total":0,
+                          **breakdown,
                        "cbo_avg":None,"dit_avg":None,"lcom_avg":None,"avg_wmc":None,"note":"ck_timeout"})
         if DELETE_REPO_AFTER: shutil.rmtree(local_dir, ignore_errors=True)
         return
     if r.returncode != 0:
         append_result({**repo,"java_files":java_files,"classes":0,"methods":0,"loc_total":0,
+                          **breakdown,
                        "cbo_avg":None,"dit_avg":None,"lcom_avg":None,"avg_wmc":None,"note":"ck_failed"})
         if DELETE_REPO_AFTER: shutil.rmtree(local_dir, ignore_errors=True)
         return
@@ -293,6 +405,7 @@ def process_repo(repo):
     class_csv, method_csv = resolve_ck_paths(out_dir, name)
     if not class_csv.exists():
         append_result({**repo,"java_files":java_files,"classes":0,"methods":0,"loc_total":0,
+                        **breakdown,
                        "cbo_avg":None,"dit_avg":None,"lcom_avg":None,"avg_wmc":None,"note":"no_class_csv"})
         if DELETE_REPO_AFTER: shutil.rmtree(local_dir, ignore_errors=True)
         return
@@ -342,6 +455,7 @@ def process_repo(repo):
         "classes": classes,
         "methods": methods,
         "loc_total": int(loc_total),
+        **breakdown,
         "cbo_avg": round(sum(cbo_vals)/len(cbo_vals), 2) if cbo_vals else None,
         "dit_avg": round(sum(dit_vals)/len(dit_vals), 2) if dit_vals else None,
         "lcom_avg": round(sum(lcom_vals)/len(lcom_vals), 2) if lcom_vals else None,
