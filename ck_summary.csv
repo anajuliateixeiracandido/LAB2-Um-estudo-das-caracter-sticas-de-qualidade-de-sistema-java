@@ -1,3 +1,6 @@
-name,stars,age_years,num_releases,java_files,classes,methods,loc_total,cbo_avg,dit_avg,lcom_avg,avg_wmc,url,clone_url,created_at,note
-Snailclimb/JavaGuide,151688,7.35,0,0,0,0,0,,,,,https://github.com/Snailclimb/JavaGuide,https://github.com/Snailclimb/JavaGuide.git,2018-05-07T13:27:00Z,no_java_files
-krahets/hello-algo,116455,2.85,9,255,215,792,7700,1.87,1.0,4.71,8.74,https://github.com/krahets/hello-algo,https://github.com/krahets/hello-algo.git,2022-11-04T11:08:34Z,
+name,stars,age_years,num_releases,java_files,classes,methods,loc_total,loc_total_src,loc_code,loc_comment,loc_blank,comment_pct,cbo_avg,dit_avg,lcom_avg,avg_wmc,url,clone_url,created_at,note
+Snailclimb/JavaGuide,151691,7.35,0,0,0,0,0,0,0,0,0,,,,,,https://github.com/Snailclimb/JavaGuide,https://github.com/Snailclimb/JavaGuide.git,2018-05-07T13:27:00Z,no_java_files
+GrowingGit/GitHub-Chinese-Top-Charts,102072,6.02,0,1,1,1,5,7,5,1,1,14.29,0.0,1.0,0.0,1.0,https://github.com/GrowingGit/GitHub-Chinese-Top-Charts,https://github.com/GrowingGit/GitHub-Chinese-Top-Charts.git,2019-09-05T03:01:56Z,
+krahets/hello-algo,116464,2.85,9,255,215,792,7700,19635,12483,4740,2412,24.14,1.87,1.0,4.71,8.74,https://github.com/krahets/hello-algo,https://github.com/krahets/hello-algo.git,2022-11-04T11:08:34Z,
+iluwatar/java-design-patterns,92640,11.1,0,1813,1894,4728,35484,117768,47741,58381,11646,49.57,3.37,1.2,1.84,3.29,https://github.com/iluwatar/java-design-patterns,https://github.com/iluwatar/java-design-patterns.git,2014-08-09T16:45:18Z,
+macrozheng/mall,81564,7.44,3,526,760,14173,100903,85643,65769,3050,16824,3.56,3.94,1.24,1110.8,20.09,https://github.com/macrozheng/mall,https://github.com/macrozheng/mall.git,2018-04-04T01:11:44Z,
