@@ -6,3 +6,10 @@ Este projeto realiza um estudo das características de qualidade de sistemas Jav
 * [Ana Julia Teixeira Candido](https://github.com/anajuliateixeiracandido)
 * [Marcella Ferreira Chaves Costa](https://github.com/marcellafccosta)
 
+### Questões de Pesquisa
+Este laboratório tem o objetivo de responder às seguintes questões de pesquisa:
+
+- RQ 01. Qual a relação entre a popularidade dos repositórios e as suas características de qualidade?
+- RQ 02. Qual a relação entre a maturidade do repositórios e as suas características de qualidade?
+- RQ 03. Qual a relação entre a atividade dos repositórios e as suas características de qualidade?
+- RQ 04. Qual a relação entre o tamanho dos repositórios e as suas características de qualidade?
