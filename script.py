@@ -4,7 +4,7 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import re
 
-MAX_REPOS       = 5       
+MAX_REPOS       = 1000       
 MAX_WORKERS     = 2
 JAVA_MEM        = "4g"
 GIT_TIMEOUT_SEC = 900
