@@ -1,15 +1,3 @@
-
-Este projeto realiza um estudo das características de qualidade de sistemas Java, analisando métricas de acoplamento, herança e coesão em repositórios populares do GitHub. A coleta e análise dos dados são feitas com a ferramenta CK, relacionando qualidade com popularidade, maturidade, atividade e tamanho dos repositórios.
-
-### Questões de Pesquisa
-Este laboratório tem o objetivo de responder às seguintes questões de pesquisa:
-
-- RQ 01. Qual a relação entre a popularidade dos repositórios e as suas características de qualidade?
-- RQ 02. Qual a relação entre a maturidade do repositórios e as suas características de qualidade?
-- RQ 03. Qual a relação entre a atividade dos repositórios e as suas características de qualidade?
-- RQ 04. Qual a relação entre o tamanho dos repositórios e as suas características de qualidade?
-
-
 # 📝 Laboratório 02 - Um estudo das características de qualidade de sistema java
 
 ## 1. Informações do grupo
@@ -22,26 +10,34 @@ Este laboratório tem o objetivo de responder às seguintes questões de pesquis
 ---
 
 ## 2. Introdução
-Descreva o contexto do laboratório, o objetivo do estudo e a relevância da análise.  
-Inclua hipóteses informais sobre os resultados esperados.
+O desenvolvimento de sistemas de software open-source envolve a colaboração de múltiplos desenvolvedores, que contribuem com diferentes partes do código ao longo do tempo. Essa abordagem colaborativa, apesar de trazer benefícios como inovação rápida e acessibilidade, também apresenta desafios em relação à manutenção de atributos de qualidade do software, como **modularidade, legibilidade e manutenibilidade**.
+
+Este laboratório tem como objetivo realizar uma análise detalhada das características de qualidade de repositórios de código open-source escritos na linguagem Java. A partir da coleta e análise de métricas de produto obtidas por meio da ferramenta CK, busca-se correlacionar essas métricas com características do processo de desenvolvimento dos repositórios, como popularidade, tamanho, atividade e maturidade. O estudo busca responder a quatro questões de pesquisa:
+
+- RQ01. Qual a relação entre a popularidade dos repositórios e suas características de qualidade? 
+
+- RQ02. Qual a relação entre a maturidade dos repositórios e suas características de qualidade? 
+
+- RQ03. Qual a relação entre a atividade dos repositórios e suas características de qualidade? 
+
+- RQ04. Qual a relação entre o tamanho dos repositórios e suas características de qualidade?
 
 **💡 Exemplos de Hipóteses Informais - Informal Hypotheses (IH):**
 
-- **IH01:** Sistemas populares recebem mais contribuições externas e lançam releases com maior frequência, refletindo um processo de desenvolvimento ativo.
-- **IH02:** Mais de 50% dos repositórios populares são mantidos há mais de 5 anos, indicando maturidade do projeto.
-- **IH03:** Espera-se que mais de 50% dos repositórios populares tenham pelo menos 70% das issues fechadas, demonstrando boa gestão de problemas.
-- **IH04:** Repositórios populares tendem a ser escritos nas linguagens mais utilizadas (ex.: JavaScript, Python, Java), representando a adoção de linguagens consolidadas.
-- **IH05:** Mais de 50% dos repositórios populares recebem atualizações nos últimos 3 meses, refletindo atividade contínua da comunidade.
-- **IH06:** Projetos populares com maior número de forks tendem a ter mais pull requests aceitas, indicando engajamento externo significativo.
-- **IH07:** Repositórios populares com grande número de stars podem apresentar Big Numbers em métricas como número de commits, branches e releases, destacando sua relevância na comunidade open-source.
+- **IH01:** 
+
+- **IH02:** Repositórios mais maduros (ou seja, com maior idade) tendem a apresentar uma qualidade de código superior, como menor acoplamento entre objetos (CBO) e menor profundidade de herança (DIT), devido ao tempo de desenvolvimento e refinamento constante do código.
+
+- **IH03:** 
+- **IH04:** Repositórios maiores, com mais linhas de código (LOC) e mais linhas de comentários, tendem a apresentar piores características de qualidade de código, como maior acoplamento entre objetos (CBO), maior profundidade de herança (DIT) e menor coesão de métodos (LCOM), devido à maior complexidade e dificuldade de manutenção associada a sistemas maiores.
 
 ---
 
 ## 3. Tecnologias e ferramentas utilizadas
-- **💻 Linguagem de Programação:** [Ex.: Python, Java]
+- **💻 Linguagem de Programação:** Python
 - **🛠 Frameworks/Bibliotecas:** [Ex.: Pandas, Matplotlib, Seaborn, CK]
-- **🌐 APIs utilizadas:** [Ex.: GitHub GraphQL API, GitHub REST API]
-- **📦 Dependências:** [Ex.: requests, numpy]
+- **🌐 APIs utilizadas:** GitHub REST API
+- **📦 Dependências:** requests, csv, time, os, subprocess, shutil, math, threading, json, platform, datetime, pathlib, concurrent.futures, re
 
 ---
 
@@ -77,13 +73,10 @@ Liste as questões de pesquisa que guiaram o estudo, com suas métricas associad
 
 | RQ   | Pergunta | Métrica utilizada | Código da Métrica |
 |------|----------|-----------------|-----------------|
-| RQ01 | Sistemas populares são maduros/antigos? | 🕰 Idade do repositório (calculado a partir da data de criação) | LM01 |
-| RQ02 | Sistemas populares recebem muita contribuição externa? | ✅ Total de Pull Requests Aceitas | LM02 |
-| RQ03 | Sistemas populares lançam releases com frequência? | 📦 Total de Releases | LM03 |
-| RQ04 | Sistemas populares são atualizados com frequência? | ⏳ Tempo desde a última atualização (dias) | LM04 |
-| RQ05 | Sistemas populares são escritos nas linguagens mais populares? | 💻 Linguagem primária de cada repositório | AM01 |
-| RQ06 | Sistemas populares possuem um alto percentual de issues fechadas? | 📋 Razão entre número de issues fechadas pelo total de issues | LM05 |
-| RQ07 | Sistemas escritos em linguagens mais populares recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência? | ✅ Pull Requests Aceitas, 📦 Número de Releases, ⏳ Tempo desde a Última Atualização, 💻 Linguagem primária | LM02, LM03, LM04, AM01 |
+| RQ01 | Qual a relação entre a popularidade dos repositórios e as suas características de qualidade? | Número de estrelas | LM01 |
+| RQ02 | Qual a relação entre a maturidade do repositórios e as suas características de qualidade? | Idade (em anos) de cada repositório coletado | LM02 |
+| RQ03 | Qual a relação entre a atividade dos repositórios e as suas características de qualidade? | Número de releases | LM03 |
+| RQ04 | Qual a relação entre o tamanho dos repositórios e as suas características de qualidade? | Linhas de código (LOC) e linhas de comentários | LM04 |
 
 ---
 
@@ -100,55 +93,14 @@ Inclua métricas relevantes de repositórios do GitHub, separando **métricas do
 #### 📊 Métricas de Laboratório - Lab Metrics (LM)
 | Código | Métrica | Descrição |
 |--------|--------|-----------|
-| LM01 | 🕰 Idade do Repositório (anos) | Tempo desde a criação do repositório até o momento atual, medido em anos. |
-| LM02 | ✅ Pull Requests Aceitas | Quantidade de pull requests que foram aceitas e incorporadas ao repositório. |
-| LM03 | 📦 Número de Releases | Total de versões ou releases oficiais publicadas no repositório. |
-| LM04 | ⏳ Tempo desde a Última Atualização (dias) | Número de dias desde a última modificação ou commit no repositório. |
-| LM05 | 📋 Percentual de Issues Fechadas (%) | Proporção de issues fechadas em relação ao total de issues criadas, em percentual. |
-| LM06 | ⭐ Número de Estrelas | Quantidade de estrelas recebidas no GitHub, representando interesse ou popularidade. |
-| LM07 | 🍴 Número de Forks | Número de forks, indicando quantas vezes o repositório foi copiado por outros usuários. |
-| LM08 | 📏 Tamanho do Repositório (LOC) | Total de linhas de código (Lines of Code) contidas no repositório. |
-
-#### 💡 Métricas adicionais trazidas pelo grupo - Additional Metrics (AM)
-| Código | Métrica | Descrição |
-|------|--------|------------|
-| AM01 | 💻 Linguagem Primária | Linguagem de programação principal do repositório (ex.: Python, JavaScript, Java) |
-| AM02 | 🔗 Forks vs Pull Requests Aceitas | Relação entre número de forks e pull requests aceitas |
-| AM03 | 📈 Evolução Temporal | Evolução temporal de releases e pull requests aceitas |
-| AM04 | 🌟 Big Numbers | Métricas com valores expressivos (commits, branches, stars, releases) |
-
-> Obs.: Adapte ou acrescente métricas conforme o seu dataset.
+| LM01 | Número de estrelas	 | Total de estrelas atribuídas ao repositório, indicando sua popularidade entre os usuários |
+| LM02 | Idade (em anos) de cada repositório coletado | Número de anos desde a criação do repositório, refletindo sua maturidade no tempo. |
+| LM03 | Número de Releases | Total de versões ou releases oficiais publicadas no repositório. |
+| LM04 | Linhas de código (LOC) e linhas de comentários | Total de linhas de código e linhas de comentários no repositório, indicando o tamanho e a qualidade da documentação do código. |
 
 ---
 
-### 6.2 Distribuição por categoria
-
-Para métricas categóricas, como linguagem de programação, faça contagens e tabelas de frequência:
-
-| Linguagem | Quantidade de Repositórios |
-|---------------|------------------------|
-| 🐍 Python     | 350                    |
-| 💻 JavaScript | 300                    |
-| ☕ Java        | 200                    |
-| 📦 Outros     | 150                    |
-
----
-
-### 6.3 Relação das RQs com as Métricas
-
-| RQ   | Pergunta | Métrica utilizada | Código |
-|------|----------|-----------------|--------|
-| RQ01 | Sistemas populares são maduros/antigos? | 🕰 Idade do Repositório (calculado a partir da data de criação) | LM01 |
-| RQ02 | Sistemas populares recebem muita contribuição externa? | ✅ Total de Pull Requests Aceitas | LM02 |
-| RQ03 | Sistemas populares lançam releases com frequência? | 📦 Total de Releases | LM03 |
-| RQ04 | Sistemas populares são atualizados com frequência? | ⏳ Tempo desde a Última Atualização (dias) | LM04 |
-| RQ05 | Sistemas populares são escritos nas linguagens mais populares? | 💻 Linguagem primária de cada repositório | AM01 |
-| RQ06 | Sistemas populares possuem alto percentual de issues fechadas? | 📋 Razão entre número de issues fechadas pelo total de issues | LM05 |
-| RQ07 | Sistemas escritos em linguagens mais populares recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência? | ✅ Pull Requests Aceitas, 📦 Número de Releases, ⏳ Tempo desde a Última Atualização, 💻 Linguagem primária | LM02, LM03, LM04, AM01 |
-
----
-
-### 6.4 Sugestões de gráficos
+### 6.2 Sugestões de gráficos
 
 Para criar visualizações das métricas, recomenda-se utilizar como referência o projeto **Seaborn Samples**:  
 - 🔗 Repositório: [Projeto Seaborn Samples](https://github.com/joaopauloaramuni/laboratorio-de-experimentacao-de-software/tree/main/PROJETOS/Projeto%20Seaborn%20Samples)
