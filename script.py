@@ -262,7 +262,7 @@ def resolve_ck_paths(out_dir: Path, repo_name: str):
 
 GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
 if not GITHUB_TOKEN:
-    raise Exception('Defina GITHUB_TOKEN (ex.: export GITHUB_TOKEN=seu_token)')
+    raise Exception('Defina a variável de ambiente GITHUB_TOKEN')
 HEADERS = {"Accept": "application/vnd.github.v3+json", "Authorization": f"token {GITHUB_TOKEN}"}
 
 def gh_get(url, max_retries=5, timeout=60):
@@ -323,25 +323,47 @@ def already_done() -> set:
                 done.add(row["name"])
     return done
 
-repositories = []
+print("Coletando repositórios da API do GitHub...")
+repositories_basic = []
 for page in range(1, 11):
     data = gh_get(f"https://api.github.com/search/repositories?q=language:Java&sort=stars&order=desc&per_page=100&page={page}")
-    if 'items' not in data: break
+    if 'items' not in data: 
+        break
+    
     for repo in data['items']:
-        created_at = repo["created_at"]
-        num_releases = count_releases(repo["full_name"])
-        age_years = (datetime.now() - datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%SZ")).days / 365
-        repositories.append({
+        repositories_basic.append({
             "name": repo["full_name"],
             "stars": repo["stargazers_count"],
             "url": repo["html_url"],
             "clone_url": repo["clone_url"],
-            "created_at": created_at,
-            "age_years": round(age_years, 2),
-            "num_releases": num_releases, 
+            "created_at": repo["created_at"],
         })
-        if len(repositories) >= MAX_REPOS: break
-    if len(repositories) >= MAX_REPOS: break
+        if len(repositories_basic) >= MAX_REPOS: 
+            break
+    
+    if len(repositories_basic) >= MAX_REPOS: 
+        break
+
+print(f"Coletados {len(repositories_basic)} repositórios básicos")
+
+
+print("Processando informações adicionais...")
+repositories = []
+for repo in repositories_basic:
+    created_at = repo["created_at"]
+    num_releases = count_releases(repo["name"])
+    age_years = (datetime.now() - datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%SZ")).days / 365
+    repositories.append({
+        "name": repo["name"],
+        "stars": repo["stars"],
+        "url": repo["url"],
+        "clone_url": repo["clone_url"],
+        "created_at": created_at,
+        "age_years": round(age_years, 2),
+        "num_releases": num_releases, 
+    })
+
+print(f"Processamento completo: {len(repositories)} repositórios prontos para análise")
 
 DONE = already_done()
 
