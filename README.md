@@ -74,9 +74,9 @@ Liste as questões de pesquisa que guiaram o estudo, com suas métricas associad
 | RQ   | Pergunta | Métrica utilizada | Código da Métrica |
 |------|----------|-----------------|-----------------|
 | RQ01 | Qual a relação entre a popularidade dos repositórios e as suas características de qualidade? | Número de estrelas | LM01 |
-| RQ02 | Qual a relação entre a maturidade do repositórios e as suas características de qualidade? | Idade (em anos) de cada repositório coletado | LM02 |
+| RQ02 | Qual a relação entre a maturidade do repositórios e as suas características de qualidade? | Idade (em anos) de cada repositório coletado, CBO e DIT | LM02 |
 | RQ03 | Qual a relação entre a atividade dos repositórios e as suas características de qualidade? | Número de releases | LM03 |
-| RQ04 | Qual a relação entre o tamanho dos repositórios e as suas características de qualidade? | Linhas de código (LOC) e linhas de comentários | LM04 |
+| RQ04 | Qual a relação entre o tamanho dos repositórios e as suas características de qualidade? | Linhas de código (LOC) e linhas de comentários, CBO, DIT e LCOM | LM04 |
 
 ---
 
@@ -97,7 +97,10 @@ Inclua métricas relevantes de repositórios do GitHub, separando **métricas do
 | LM02 | Idade (em anos) de cada repositório coletado | Número de anos desde a criação do repositório, refletindo sua maturidade no tempo. |
 | LM03 | Número de Releases | Total de versões ou releases oficiais publicadas no repositório. |
 | LM04 | Linhas de código (LOC) e linhas de comentários | Total de linhas de código e linhas de comentários no repositório, indicando o tamanho e a qualidade da documentação do código. |
-
+| LM05 | Linhas de comentários | Total de linhas de comentários no repositório, indicando o tamanho e a qualidade da documentação do código. |
+| LM06 | CBO: Coupling between objects	 | Total de dependências que uma classe possui com outras classes, indicando o grau de acoplamento entre objetos |
+| LM07 | DIT: Depth Inheritance Tree	 |Profundidade de uma classe na hierarquia de herança, refletindo a complexidade da reutilização de código|
+| LM08 | LCOM: Lack of Cohesion of Methods	 | Grau de coesão entre os métodos de uma classe, indicando se a classe realiza funções relacionadas ou múltiplas responsabilidades |
 ---
 
 ### 6.2 Sugestões de gráficos
@@ -122,16 +125,16 @@ Para criar visualizações das métricas, recomenda-se utilizar como referência
 
 Apresente as estatísticas descritivas das métricas analisadas, permitindo uma compreensão mais detalhada da distribuição dos dados.
 
-| Métrica | Código | Média | Mediana | Moda | Desvio Padrão | Mínimo | Máximo |
+| Métrica | Código | Média | Mediana | Moda | Desvio Padrão | Mínimo | Máximo | 
 |---------|--------|------|--------|-----|---------------|--------|--------|
-| Idade do Repositório (anos) | LM01 | X | Y | Z | A | B | C |
-| Pull Requests Aceitas | LM02 | X | Y | Z | A | B | C |
-| Número de Releases | LM03 | X | Y | Z | A | B | C |
-| Tempo desde a Última Atualização (dias) | LM04 | X | Y | Z | A | B | C |
-| Percentual de Issues Fechadas (%) | LM05 | X | Y | Z | A | B | C |
-| Número de Estrelas (Stars) | LM06 | X | Y | Z | A | B | C |
-| Número de Forks | LM07 | X | Y | Z | A | B | C |
-| Tamanho do Repositório (LOC) | LM08 | X | Y | Z | A | B | C |
+| Idade do Repositório (anos) | LM01 | 9,652557673 | 9,7 | 8,76 | 3,056436355 | 0,17 | 16,92 |
+| Número de estrelas	 | LM02 | 9620,285858 | 5773 | 3813 | 3,056436355| 3414 | 151757 |
+| Número de Releases | LM03 | 41,30391174 | 10 | 0 | 3,056436355 | 0 | 2215 |
+| Linhas de código (LOC) | LM04 | 79452,63892 | 13368| 0 | 3,056436355 | 0 | 2006814 |
+| Linhas de comentários | LM05 | 52011,68706|4743 | 0 | 3,056436355 | 0 | 12462921|
+| CBO: Coupling between objects	| LM06 | 5,352302905|5,315 |  0|1,873299378| 0 |21,93 |
+| DIT: Depth Inheritance Tree	 | LM07 | 1,460259336| 1,39| 1 |0,3690244713| 1 | 5,71|
+| LCOM: Lack of Cohesion of Methods	 | LM08 |118,7377801 | 23,75| 0 | 1785,655144 |0  | 55203,28|
 
 > Dica: Inclua gráficos como histogramas ou boxplots junto com essas estatísticas para facilitar a interpretação.
 
