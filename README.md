@@ -139,7 +139,7 @@ Para criar visualizações das métricas, recomenda-se utilizar como referência
 
 > Dica: combine tabelas e gráficos para facilitar a interpretação e evidenciar padrões nos dados.
 
-### 6.5 Estatísticas Descritivas
+### 6.2 Estatísticas Descritivas
 
 Apresente as estatísticas descritivas das métricas analisadas, permitindo uma compreensão mais detalhada da distribuição dos dados.
 
@@ -155,6 +155,18 @@ Apresente as estatísticas descritivas das métricas analisadas, permitindo uma 
 | LCOM: Lack of Cohesion of Methods	 | LM08 |118,7377801 | 23,75| 0 | 1785,655144 |0  | 55203,28|
 
 > Dica: Inclua gráficos como histogramas ou boxplots junto com essas estatísticas para facilitar a interpretação.
+
+
+
+### 6.3 Análises
+
+#### 6.3.1 RQ01 (Popularidade x Qualidade)
+
+#### 6.3.2 RQ02 (Maturidade x Qualidade)
+
+#### 6.3.3 RQ03 (Atividade x Qualidade)
+
+#### 6.3.4 RQ04 (Tamanho x Qualidade)
 
 ---
 
