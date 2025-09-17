@@ -1,11 +1,11 @@
-# 📝 Laboratório 02 - Um estudo das características de qualidade de sistema java
+# Laboratório 02 - Um estudo das características de qualidade de sistema java
 
 ## 1. Informações do grupo
-- **🎓 Curso:** Engenharia de Software
-- **📘 Disciplina:** Laboratório de Experimentação de Software
-- **🗓 Período:** 6° Período
-- **👨‍🏫 Professor(a):** Prof. Wesley Dias Maciel
-- **👥 Membros do Grupo:** [[Ana Julia Teixeira Candido](https://github.com/anajuliateixeiracandido) e [Marcella Ferreira Chaves Costa](https://github.com/marcellafccosta)]
+- **Curso:** Engenharia de Software
+- **Disciplina:** Laboratório de Experimentação de Software
+- **Período:** 6° Período
+- **Professor(a):** Prof. Wesley Dias Maciel
+- **Membros do Grupo:** [[Ana Julia Teixeira Candido](https://github.com/anajuliateixeiracandido) e [Marcella Ferreira Chaves Costa](https://github.com/marcellafccosta)]
 
 ---
 
@@ -22,7 +22,7 @@ Este laboratório tem como objetivo realizar uma análise detalhada das caracter
 
 - RQ04. Qual a relação entre o tamanho dos repositórios e suas características de qualidade?
 
-**💡 Exemplos de Hipóteses Informais - Informal Hypotheses (IH):**
+**Exemplos de Hipóteses Informais - Informal Hypotheses (IH):**
 
 - **IH01:** 
 
@@ -34,10 +34,10 @@ Este laboratório tem como objetivo realizar uma análise detalhada das caracter
 ---
 
 ## 3. Tecnologias e ferramentas utilizadas
-- **💻 Linguagem de Programação:** Python
-- **🛠 Frameworks/Bibliotecas:** [Ex.: Pandas, Matplotlib, Seaborn, CK]
-- **🌐 APIs utilizadas:** GitHub REST API
-- **📦 Dependências:** requests, csv, time, os, subprocess, shutil, math, threading, json, platform, datetime, pathlib, concurrent.futures, re
+- **Linguagem de Programação:** Python
+- **Frameworks/Bibliotecas:** [Ex.: Pandas, Matplotlib, Seaborn, CK]
+- **APIs utilizadas:** GitHub REST API
+- **Dependências:** requests, csv, time, os, subprocess, shutil, math, threading, json, platform, datetime, pathlib, concurrent.futures, re
 
 ---
 
@@ -69,7 +69,7 @@ Descreva detalhadamente as etapas do experimento ou estudo, incluindo coleta de 
 
 Liste as questões de pesquisa que guiaram o estudo, com suas métricas associadas:
 
-**🔍 Questões de Pesquisa - Research Questions (RQs):**
+**Questões de Pesquisa - Research Questions (RQs):**
 
 | RQ   | Pergunta | Métrica utilizada | Código da Métrica |
 |------|----------|-----------------|-----------------|
@@ -90,7 +90,7 @@ Apresente os resultados obtidos, com tabelas e gráficos sempre que possível.
 
 Inclua métricas relevantes de repositórios do GitHub, separando **métricas do laboratório** e **métricas adicionais trazidas pelo grupo**:
 
-#### 📊 Métricas de Laboratório - Lab Metrics (LM)
+#### Métricas de Laboratório - Lab Metrics (LM)
 | Código | Métrica | Descrição |
 |--------|--------|-----------|
 | LM01 | Número de estrelas	 | Total de estrelas atribuídas ao repositório, indicando sua popularidade entre os usuários |
@@ -103,20 +103,20 @@ Inclua métricas relevantes de repositórios do GitHub, separando **métricas do
 ### 6.2 Sugestões de gráficos
 
 Para criar visualizações das métricas, recomenda-se utilizar como referência o projeto **Seaborn Samples**:  
-- 🔗 Repositório: [Projeto Seaborn Samples](https://github.com/joaopauloaramuni/laboratorio-de-experimentacao-de-software/tree/main/PROJETOS/Projeto%20Seaborn%20Samples)
+- Repositório: [Projeto Seaborn Samples](https://github.com/joaopauloaramuni/laboratorio-de-experimentacao-de-software/tree/main/PROJETOS/Projeto%20Seaborn%20Samples)
 
-- **📊 Histograma**: `grafico_histograma.png` → distribuição de idade, PRs aceitas ou estrelas.  
-- **📈 Boxplot**: `grafico_boxplot.png` → dispersão de métricas como forks, issues fechadas ou LOC.  
-- **📊 Gráfico de Barras**: `grafico_barras.png` → comparação de métricas entre linguagens.  
-- **🥧 Gráfico de Pizza**: `grafico_pizza.png` → percentual de repositórios por linguagem.  
-- **📈 Gráfico de Linha**: `grafico_linha.png` → evolução de releases ou PRs ao longo do tempo.  
-- **🔹 Scatterplot / Dispersão**: `grafico_dispersao.png` → relação entre estrelas e forks.  
-- **🌡 Heatmap**: `grafico_heatmap.png` → correlação entre métricas (idade, PRs, stars, forks, issues).  
-- **🔗 Pairplot**: `grafico_pairplot.png` → análise de múltiplas métricas simultaneamente.  
-- **🎻 Violin Plot**: `grafico_violin.png` → distribuição detalhada de métricas por subgrupo.  
-- **📊 Barras Empilhadas**: `grafico_barras_empilhadas.png` → comparação de categorias dentro de métricas.
+- Histograma: `grafico_histograma.png` → distribuição de idade, PRs aceitas ou estrelas.  
+- Boxplot: `grafico_boxplot.png` → dispersão de métricas como forks, issues fechadas ou LOC.  
+- Gráfico de Barras: `grafico_barras.png` → comparação de métricas entre linguagens.  
+- Gráfico de Pizza: `grafico_pizza.png` → percentual de repositórios por linguagem.  
+- Gráfico de Linha: `grafico_linha.png` → evolução de releases ou PRs ao longo do tempo.  
+- Scatterplot / Dispersão: `grafico_dispersao.png` → relação entre estrelas e forks.  
+- Heatmap: `grafico_heatmap.png` → correlação entre métricas (idade, PRs, stars, forks, issues).  
+- Pairplot: `grafico_pairplot.png` → análise de múltiplas métricas simultaneamente.  
+- Violin Plot: `grafico_violin.png` → distribuição detalhada de métricas por subgrupo.  
+- Barras Empilhadas: `grafico_barras_empilhadas.png` → comparação de categorias dentro de métricas.
 
-> 💡 Dica: combine tabelas e gráficos para facilitar a interpretação e evidenciar padrões nos dados.
+> Dica: combine tabelas e gráficos para facilitar a interpretação e evidenciar padrões nos dados.
 
 ### 6.5 Estatísticas Descritivas
 
@@ -124,16 +124,16 @@ Apresente as estatísticas descritivas das métricas analisadas, permitindo uma 
 
 | Métrica | Código | Média | Mediana | Moda | Desvio Padrão | Mínimo | Máximo |
 |---------|--------|------|--------|-----|---------------|--------|--------|
-| 🕰 Idade do Repositório (anos) | LM01 | X | Y | Z | A | B | C |
-| ✅ Pull Requests Aceitas | LM02 | X | Y | Z | A | B | C |
-| 📦 Número de Releases | LM03 | X | Y | Z | A | B | C |
-| ⏳ Tempo desde a Última Atualização (dias) | LM04 | X | Y | Z | A | B | C |
-| 📋 Percentual de Issues Fechadas (%) | LM05 | X | Y | Z | A | B | C |
-| ⭐ Número de Estrelas (Stars) | LM06 | X | Y | Z | A | B | C |
-| 🍴 Número de Forks | LM07 | X | Y | Z | A | B | C |
-| 📏 Tamanho do Repositório (LOC) | LM08 | X | Y | Z | A | B | C |
+| Idade do Repositório (anos) | LM01 | X | Y | Z | A | B | C |
+| Pull Requests Aceitas | LM02 | X | Y | Z | A | B | C |
+| Número de Releases | LM03 | X | Y | Z | A | B | C |
+| Tempo desde a Última Atualização (dias) | LM04 | X | Y | Z | A | B | C |
+| Percentual de Issues Fechadas (%) | LM05 | X | Y | Z | A | B | C |
+| Número de Estrelas (Stars) | LM06 | X | Y | Z | A | B | C |
+| Número de Forks | LM07 | X | Y | Z | A | B | C |
+| Tamanho do Repositório (LOC) | LM08 | X | Y | Z | A | B | C |
 
-> 💡 Dica: Inclua gráficos como histogramas ou boxplots junto com essas estatísticas para facilitar a interpretação.
+> Dica: Inclua gráficos como histogramas ou boxplots junto com essas estatísticas para facilitar a interpretação.
 
 ---
 
@@ -141,10 +141,10 @@ Apresente as estatísticas descritivas das métricas analisadas, permitindo uma 
 
 Nesta seção, compare os resultados obtidos com as hipóteses informais levantadas pelo grupo no início do experimento.
 
-- **✅ Confirmação ou refutação das hipóteses**: identifique quais hipóteses foram confirmadas pelos dados e quais foram refutadas.  
-- **❌ Explicações para resultados divergentes**: caso algum resultado seja diferente do esperado, tente levantar possíveis causas ou fatores que possam ter influenciado.  
-- **🔍 Padrões e insights interessantes**: destaque tendências ou comportamentos relevantes observados nos dados que não haviam sido previstos nas hipóteses.  
-- **📊 Comparação por subgrupos (opcional)**: se houver segmentação dos dados (ex.: por linguagem de programação, tamanho do repositório), discuta como os resultados se comportam em cada grupo.  
+- Confirmação ou refutação das hipóteses: identifique quais hipóteses foram confirmadas pelos dados e quais foram refutadas.  
+- Explicações para resultados divergentes: caso algum resultado seja diferente do esperado, tente levantar possíveis causas ou fatores que possam ter influenciado.  
+- Padrões e insights interessantes: destaque tendências ou comportamentos relevantes observados nos dados que não haviam sido previstos nas hipóteses.  
+- Comparação por subgrupos (opcional): se houver segmentação dos dados (ex.: por linguagem de programação, tamanho do repositório), discuta como os resultados se comportam em cada grupo.  
 
 > Relacione sempre os pontos observados com as hipóteses informais definidas na introdução, fortalecendo a análise crítica do experimento.
 
@@ -154,17 +154,17 @@ Nesta seção, compare os resultados obtidos com as hipóteses informais levanta
 
 Resumo das principais descobertas do laboratório.
 
-- **🏆 Principais insights:**  
+- Principais insights:  
   - Big numbers encontrados nos repositórios, popularidade e métricas destacadas.  
   - Descobertas relevantes sobre padrões de contribuição, releases, issues fechadas ou linguagens mais utilizadas.  
   - Confirmações ou refutações das hipóteses informais levantadas pelo grupo.
 
-- **⚠️ Problemas e dificuldades enfrentadas:**  
+- Problemas e dificuldades enfrentadas:  
   - Limitações da API do GitHub e paginação de grandes volumes de dados.  
   - Normalização e tratamento de dados inconsistentes ou ausentes.  
   - Desafios com cálculos de métricas ou integração de múltiplos arquivos CSV.  
 
-- **🚀 Sugestões para trabalhos futuros:**  
+- Sugestões para trabalhos futuros:  
   - Analisar métricas adicionais ou aprofundar correlações entre métricas de qualidade e métricas de processo.  
   - Testar outras linguagens de programação ou frameworks.  
   - Implementar dashboards interativos para visualização de grandes volumes de dados.  
@@ -174,16 +174,16 @@ Resumo das principais descobertas do laboratório.
 
 ## 9. Referências
 Liste as referências bibliográficas ou links utilizados.
-- [📌 GitHub API Documentation](https://docs.github.com/en/graphql)
-- [📌 CK Metrics Tool](https://ckjm.github.io/)
-- [📌 Biblioteca Pandas](https://pandas.pydata.org/)
-- [📌 Power BI](https://docs.microsoft.com/en-us/power-bi/fundamentals/service-get-started)
+- [GitHub API Documentation](https://docs.github.com/en/graphql)
+- [CK Metrics Tool](https://ckjm.github.io/)
+- [Biblioteca Pandas](https://pandas.pydata.org/)
+- [Power BI](https://docs.microsoft.com/en-us/power-bi/fundamentals/service-get-started)
 
 ---
 
 ## 10. Apêndices
-- 💾 Scripts utilizados para coleta e análise de dados.
-- 🔗 Consultas GraphQL ou endpoints REST.
-- 📊 Planilhas e arquivos CSV gerados.
+- Scripts utilizados para coleta e análise de dados.
+- Consultas GraphQL ou endpoints REST.
+- Planilhas e arquivos CSV gerados.
 
 ---
