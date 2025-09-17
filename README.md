@@ -139,25 +139,7 @@ Inclua métricas relevantes de repositórios do GitHub, separando **métricas do
 | LM08 | LCOM: Lack of Cohesion of Methods	 | Grau de coesão entre os métodos de uma classe, indicando se a classe realiza funções relacionadas ou múltiplas responsabilidades |
 ---
 
-### 6.2 Sugestões de gráficos
-
-Para criar visualizações das métricas, recomenda-se utilizar como referência o projeto **Seaborn Samples**:  
-- Repositório: [Projeto Seaborn Samples](https://github.com/joaopauloaramuni/laboratorio-de-experimentacao-de-software/tree/main/PROJETOS/Projeto%20Seaborn%20Samples)
-
-- Histograma: `grafico_histograma.png` → distribuição de idade, PRs aceitas ou estrelas.  
-- Boxplot: `grafico_boxplot.png` → dispersão de métricas como forks, issues fechadas ou LOC.  
-- Gráfico de Barras: `grafico_barras.png` → comparação de métricas entre linguagens.  
-- Gráfico de Pizza: `grafico_pizza.png` → percentual de repositórios por linguagem.  
-- Gráfico de Linha: `grafico_linha.png` → evolução de releases ou PRs ao longo do tempo.  
-- Scatterplot / Dispersão: `grafico_dispersao.png` → relação entre estrelas e forks.  
-- Heatmap: `grafico_heatmap.png` → correlação entre métricas (idade, PRs, stars, forks, issues).  
-- Pairplot: `grafico_pairplot.png` → análise de múltiplas métricas simultaneamente.  
-- Violin Plot: `grafico_violin.png` → distribuição detalhada de métricas por subgrupo.  
-- Barras Empilhadas: `grafico_barras_empilhadas.png` → comparação de categorias dentro de métricas.
-
-> Dica: combine tabelas e gráficos para facilitar a interpretação e evidenciar padrões nos dados.
-
-### 6.3 Estatísticas Descritivas
+### 6.2 Estatísticas Descritivas
 
 Apresente as estatísticas descritivas das métricas analisadas, permitindo uma compreensão mais detalhada da distribuição dos dados.
 
@@ -174,8 +156,8 @@ Apresente as estatísticas descritivas das métricas analisadas, permitindo uma 
 
 > Dica: Inclua gráficos como histogramas ou boxplots junto com essas estatísticas para facilitar a interpretação.
 
-### 6.4 Análises
-### 6.4.1 RQ01 — Popularidade x Qualidade
+### 6.3 Análises
+### 6.3.1 RQ01 — Popularidade x Qualidade
 
 | Popularidade            | CBO (mean) | CBO (median) | CBO (std) | DIT (mean) | DIT (median) | DIT (std) | LCOM (mean) | LCOM (median) | LCOM (std) |
 |-------------------------|------------|--------------|-----------|------------|--------------|-----------|-------------|---------------|------------|
@@ -194,9 +176,46 @@ Apresente as estatísticas descritivas das métricas analisadas, permitindo uma 
 - **Hipótese parcialmente confirmada:** popularidade extrema está associada a melhor qualidade.  
 - **Insight:** há um “ponto ótimo” de popularidade em que a qualidade estrutural é maximizada.  
 
-#### 6.4.2 RQ02 (Maturidade x Qualidade)
+#### 6.3.2 RQ02 (Maturidade x Qualidade)
+**Pergunta:** Qual a relação entre a maturidade (idade) dos repositórios e suas características de qualidade?
 
-### 6.4.3 RQ03 — Atividade x Qualidade
+**Hipótese Informal:** Repositórios mais maduros (ou seja, com maior idade) tendem a apresentar uma qualidade de código superior, como menor acoplamento entre objetos (CBO) e menor profundidade de herança (DIT), devido ao tempo de desenvolvimento e refinamento constante do código.
+
+
+Para testar a hipótese, a maturidade dos repositórios foi categorizada em quatro grupos:  
+- **Jovem**: 0-3 anos 
+- **Médio**: 3-7 anos 
+- **Maduro**: 7-12 anos 
+- **Muito Maduro**: 12+ anos 
+
+A tabela a seguir mostra a média e o desvio padrão das métricas CBO e DIT para cada grupo de maturidade.
+
+| Categoria             | CBO (média ± dp) | DIT (média ± dp) |
+|:----------------------|-----------------:|-----------------:|
+| Jovem (0–3 anos)      | 5,879 ± 2,743    | 1,430 ± 0,831    |
+| Médio (3–7 anos)      | 5,401 ± 2,193    | 1,374 ± 0,343    |
+| Maduro (7–12 anos)    | 5,291 ± 1,852    | 1,450 ± 0,354    |
+| Muito Maduro (12+ anos)| 5,408 ± 1,521    | 1,547 ± 0,298    |
+
+#### Correlações de Pearson (idade vs métricas de qualidade):
+As correlações foram calculadas para quantificar a relação linear entre a idade dos repositórios e as métricas de qualidade.
+
+1. **CBO (Coupling Between Objects)**
+   - Correlação: r = 0.0038
+   - P-valor: p = 9.07e-01
+   - **Interpretação**: A correlação é muito fraca e estatisticamente não significativa. A idade do repositório não tem uma relação linear perceptível com o acoplamento.
+
+2. **DIT (Depth of Inheritance Tree)**
+   - Correlação: r = 0.1809
+   - P-valor: p = 1.54e-08
+   - **Interpretação**: A correlação é fraca, mas estatisticamente significativa. Há uma leve tendência de que o DIT aumente com a idade dos repositórios.
+
+<img src="imagens/rq02.png"/>
+
+A análise visual dos gráficos de dispersão reforça esses resultados. O gráfico de Idade vs. CBO mostra uma linha de tendência quase horizontal, confirmando a ausência de uma relação linear, isso contradiz a ideia de que projetos mais maduros tendem a ter um acoplamento menor. Já o gráfico de Idade vs. DIT exibe uma linha de tendência com uma inclinação positiva, sugerindo que, com o tempo, a profundidade de herança tende a aumentar, ou seja, repositórios mais antigos tendem a ter uma profundidade de herança ligeiramente maior, o que vai diretamente contra a hipótese de que a maturidade levaria a uma herança mais simples.
+
+
+### 6.3.3 RQ03 — Atividade x Qualidade
 
 | Atividade        | CBO (mean) | CBO (median) | CBO (std) | DIT (mean) | DIT (median) | DIT (std) | LCOM (mean) | LCOM (median) | LCOM (std) |
 |------------------|------------|--------------|-----------|------------|--------------|-----------|-------------|---------------|------------|
@@ -217,7 +236,73 @@ Apresente as estatísticas descritivas das métricas analisadas, permitindo uma 
 - **Insight:** projetos abandonados tendem a deteriorar em coesão, enquanto a manutenção contínua, mesmo com maior acoplamento, preserva a qualidade estrutural.  
 
 
-#### 6.4.4 RQ04 (Tamanho x Qualidade)
+#### 6.3.4 RQ04 (Tamanho x Qualidade)
+**Pergunta**: Qual a relação entre o tamanho dos repositórios e suas características de qualidade?
+
+**Hipótese Informal:**: Repositórios maiores, com mais linhas de código (LOC) e mais linhas de comentários, tendem a apresentar piores características de qualidade de código, como maior acoplamento entre objetos (CBO), maior profundidade de herança (DIT) e menor coesão de métodos (LCOM), devido à maior complexidade e dificuldade de manutenção associada a sistemas maiores.
+
+Para testar a hipótese, o tamanho dos repositórios foi categorizada em quatro grupos, baseada em quartis de LOC:
+- **Pequeno (Q1)**: 0 - 3,802 LOC 
+- **Médio (Q2)**: 3,802 - 18,137 LOC 
+- **Grande (Q3)**: 18,137 - 75,865 LOC 
+- **Muito Grande (Q4)**: 75,865+ LOC
+
+#### Métricas de Tamanho por Categoria
+
+| Categoria | LOC (média) | Comentários (média) | 
+|-----------|-------------|---------------------|
+| Pequeno   | 1,750       | 418                 | 
+| Médio     | 9,449       | 2,941               |
+| Grande    | 39,305      | 12,125              | 
+| Muito Grande | 510,826  | 192,771             | 
+
+#### Métricas de Qualidade por Categoria
+
+| Categoria | CBO (média ± dp) | DIT (média ± dp) | LCOM (média ± dp) |
+|-----------|-------------------|-------------------|--------------------|
+| Pequeno   | 4.509 ± 1.963     | 1.359 ± 0.310     | 30.830 ± 70.148    | 
+| Médio     | 4.914 ± 1.493     | 1.414 ± 0.304     | 34.876 ± 83.415    | 
+| Grande    | 5.663 ± 1.504     | 1.532 ± 0.479     | 75.448 ± 207.846   | 
+| Muito Grande | 6.393 ± 1.941  | 1.541 ± 0.321     | 350.147 ± 3660.027 | 
+
+A média de todas as métricas de qualidade (CBO, DIT e LCOM) mostra um aumento constante à medida que o tamanho dos repositórios cresce. A média do CBO aumenta de 4,509 para 6,393, indicando que repositórios maiores tendem a ter maior acoplamento. A média do DIT sobe de 1,359 para 1,541, sugerindo hierarquias de herança mais profundas. A média do LCOM (Falta de Coesão) tem o aumento mais dramático, saltando para 350,147 nos projetos "Muito Grande", o que significa que a coesão de métodos se degrada significativamente. **A evidência estatística demonstra que a qualidade do código, avaliada por essas métricas, tende a diminuir de forma consistente e previsível à medida que o tamanho dos projetos aumenta.**
+
+
+#### Análise das Correlações por Linhas de Código (LOC)
+1. **LOC vs CBO (Coupling Between Objects)**
+   - Correlação Pearson: r = 0.2816, p = 4.99e-19
+   - Correlação Spearman: ρ = 0.4233, p = 3.46e-43
+   - **Interpretação**: A correlação **positiva** (r=0,2816) e, principalmente, a forte correlação de Spearman (ρ=0,4233), ambas **estatisticamente significativas**, indicam que, à medida que um repositório cresce em tamanho, o acoplamento entre seus objetos tende a aumentar. Este resultado é um forte indício de que a **modularidade e a independência das classes são comprometidas em sistemas maiores.**
+   
+
+2. **LOC vs DIT (Depth of Inheritance Tree)**
+   - Correlação Pearson: r = 0.0870, p = 6.85e-03
+   - Correlação Spearman: ρ = 0.2613, p = 1.64e-16
+   - **Interpretação**: A correlação de Pearson (r=0,0870) é muito fraca, mas a correlação de Spearman (ρ=0,2613) é mais moderada e significativa. Isso sugere que a relação não é estritamente linear, mas há uma tendência clara de que a **hierarquia de herança se torne mais profunda à medida que o projeto se expande.**
+
+3. **LOC vs LCOM (Lack of Cohesion of Methods)**
+   - Correlação Pearson: r = 0.0974, p = 2.46e-03
+   - Correlação Spearman: ρ = 0.4441, p = 7.58e-48
+   - **Interpretação**: A correlação de Pearson (r=0,0974) é fraca, mas a correlação de Spearman (ρ=0,4441) é a mais forte de todas as análises. O valor elevado de ρ demonstra uma relação monotônica muito forte, indicando que a **falta de coesão de métodos (LCOM) aumenta drasticamente à medida que o tamanho do repositório cresce.**
+  
+#### Análise das Correlações por Linhas de Comentários
+1. **Comentários vs CBO**: r = 0.2253, p = 1.48e-12 - **Significativa**
+2. **Comentários vs DIT**: r = 0.0903, p = 5.01e-03 - **Significativa**
+3. **Comentários vs LCOM**: r = 0.0922, p = 4.17e-03 - **Significativa**
+
+Os resultados para a quantidade de comentários reforçam as conclusões anteriores. Todas as correlações com as métricas de qualidade (CBO: r=0,2253; DIT: r=0,0903; LCOM: r=0,0922) são positivas e significativas. Isso sugere que, em **projetos maiores e com mais documentação (mais linhas de comentários), as métricas de complexidade e acoplamento também são consistentemente maiores.**
+
+Podemos afirmar a analise acima com o mapa de calor a seguir:
+
+<img src="imagens/rq04.png"/>
+
+Ele usa cores para mostrar a força e a direção das correlações entre as métricas. As cores quentes (vermelho/laranja) indicam correlações positivas, enquanto as cores frias (azul) indicam correlações negativas. A intensidade da cor e o valor numérico em cada quadrado mostram quão forte é a relação.
+
+- Relação entre Tamanho e Acoplamento (CBO): Observe o quadrado que cruza loc_code e cbo_avg. A cor é um laranja claro e o valor é 0.28. Isso confirma visualmente a correlação positiva que encontramos na análise anterior: **à medida que o tamanho do código aumenta, o acoplamento também tende a aumentar.**
+
+- Relação entre Tamanho e Profundidade de Herança (DIT): O quadrado que cruza loc_code e dit_avg tem uma cor laranja bem mais clara e um valor de 0.09. **A correlação é positiva, mas muito mais fraca, como a análise de Pearson já havia sugerido.**
+
+- Relação entre Tamanho e Coesão (LCOM): No cruzamento de loc_code com lcom_avg, a correlação é fraca e positiva (0.10). Embora fraca, a tendência está alinhada com a hipótese de que **projetos maiores tendem a ter menor coesão (LCOM maior).**
 
 ---
 
