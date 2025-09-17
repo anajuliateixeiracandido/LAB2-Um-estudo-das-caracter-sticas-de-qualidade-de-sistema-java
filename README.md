@@ -22,7 +22,7 @@ Este laboratório tem como objetivo realizar uma análise detalhada das caracter
 
 - RQ04. Qual a relação entre o tamanho dos repositórios e suas características de qualidade?
 
-**Exemplos de Hipóteses Informais - Informal Hypotheses (IH):**
+**Hipóteses Informais - Informal Hypotheses (IH):**
 
 - **IH01:** 
 
@@ -30,6 +30,24 @@ Este laboratório tem como objetivo realizar uma análise detalhada das caracter
 
 - **IH03:** 
 - **IH04:** Repositórios maiores, com mais linhas de código (LOC) e mais linhas de comentários, tendem a apresentar piores características de qualidade de código, como maior acoplamento entre objetos (CBO), maior profundidade de herança (DIT) e menor coesão de métodos (LCOM), devido à maior complexidade e dificuldade de manutenção associada a sistemas maiores.
+
+**Hipóteses Formais - Formal Hypotheses (FH):**
+#### **RQ01 - Popularidade vs Qualidade:**
+- **H0₁:** 
+- **H1₁:** 
+
+#### **RQ02 - Maturidade vs Qualidade:**
+- **H0₂:** Não existe correlação significativa entre a maturidade dos repositórios (idade em anos) e suas métricas de qualidade de código (CBO, DIT, WMC, LCOM).
+- **H1₂:** Existe correlação significativa entre a maturidade dos repositórios e suas métricas de qualidade de código.
+
+#### **RQ03 - Atividade vs Qualidade:**
+- **H0₃:** 
+- **H1₃:** 
+
+#### **RQ04 - Tamanho vs Qualidade:**
+- **H0₄:** Não existe correlação significativa entre o tamanho dos repositórios (LOC, número de classes) e suas métricas de qualidade de código (CBO, DIT, WMC, LCOM).
+- **H1₄:** Existe correlação significativa entre o tamanho dos repositórios e suas métricas de qualidade de código.
+
 
 ---
 
