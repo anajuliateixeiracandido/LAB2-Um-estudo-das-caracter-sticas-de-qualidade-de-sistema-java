@@ -166,7 +166,7 @@ O **LCOM**, porém, revela um padrão interessante: ele cresce drasticamente nos
 
 <img src="graficos/rq01_popularidade_vs_qualidade.png"/>
 
-#### 6.2.2 RQ02 (Maturidade x Qualidade)
+### 6.2.2 RQ02 (Maturidade x Qualidade)
 **Pergunta:** Qual a relação entre a maturidade (idade) dos repositórios e suas características de qualidade?
 
 **Hipótese Informal:** Repositórios mais maduros (ou seja, com maior idade) tendem a apresentar uma qualidade de código superior, como menor acoplamento entre objetos (CBO) e menor profundidade de herança (DIT), devido ao tempo de desenvolvimento e refinamento constante do código.
@@ -226,7 +226,7 @@ O gráfico evidencia que a atividade contínua é fundamental para preservar a c
 
 <img src="graficos/rq03_atividade_vs_qualidade.png"/>
 
-#### 6.3.4 RQ04 (Tamanho x Qualidade)
+### 6.3.4 RQ04 (Tamanho x Qualidade)
 **Pergunta**: Qual a relação entre o tamanho dos repositórios e suas características de qualidade?
 
 **Hipótese Informal:**: Repositórios maiores, com mais linhas de código (LOC) e mais linhas de comentários, tendem a apresentar piores características de qualidade de código, como maior acoplamento entre objetos (CBO), maior profundidade de herança (DIT) e menor coesão de métodos (LCOM), devido à maior complexidade e dificuldade de manutenção associada a sistemas maiores.
@@ -263,7 +263,6 @@ A média de todas as métricas de qualidade (CBO, DIT e LCOM) mostra um aumento 
    - Correlação Pearson: r = 0.2816, p = 4.99e-19
    - Correlação Spearman: ρ = 0.4233, p = 3.46e-43
    - **Interpretação**: A correlação **positiva** (r=0,2816) e, principalmente, a forte correlação de Spearman (ρ=0,4233), ambas **estatisticamente significativas**, indicam que, à medida que um repositório cresce em tamanho, o acoplamento entre seus objetos tende a aumentar. Este resultado é um forte indício de que a **modularidade e a independência das classes são comprometidas em sistemas maiores.**
-   
 
 2. **LOC vs DIT (Depth of Inheritance Tree)**
    - Correlação Pearson: r = 0.0870, p = 6.85e-03
@@ -358,10 +357,6 @@ As correlações entre LOC/Comentários vs. LCOM são positivas e significativas
 
 Em resumo, a correlação positiva em todas as métricas significa que as características que indicam pior qualidade de código (alto acoplamento, herança complexa e baixa coesão) crescem junto com o tamanho do repositório, validando a hipótese de que repositórios maiores tendem a ter uma qualidade de código inferior.
 
-### 7.5 Limitações Gerais
-
-A análise revelou que **todos os repositórios estudados já são altamente populares** (>3.400 estrelas), limitando a generalização dos resultados para o ecossistema completo do GitHub. Isso pode ter enviesado os resultados em favor de projetos já estabelecidos e com certo nível de maturidade arquitetural.
-
 ---
 
 ## 8. Conclusão
@@ -401,40 +396,7 @@ A análise da relação entre o tamanho dos repositórios e a qualidade do códi
 - **Valores extremos:** LCOM apresentou outliers significativos que requereram análise cuidadosa
 - **Interpretação de métricas:** Diferenciação entre padrões estruturais intencionais e deterioração de código
 
-### 8.4 Sugestões para trabalhos futuros
 
-#### 8.4.1 Para RQ01 - Popularidade vs Qualidade
-- **Análise de pontos de inflexão:** Identificar exatamente em que faixa de popularidade ocorre a melhoria da qualidade estrutural
-- **Estudo longitudinal:** Acompanhar a evolução da qualidade conforme repositórios ganham popularidade ao longo do tempo
-
-#### 8.4.2 Para RQ02 - Maturidade vs Qualidade
-- **Análise de marcos temporais:** Investigar se eventos específicos (mudanças de linguagem, frameworks, liderança) influenciam a degradação da qualidade ao longo do tempo
-- **Comparação por gerações tecnológicas:** Analisar se repositórios criados em diferentes eras (pré-2010, 2010-2015, 2015+) seguem padrões distintos de evolução
-
-#### 8.4.3 Para RQ03 - Atividade vs Qualidade
-- **Análise de padrões de release:** Investigar se o tipo de release (major, minor, patch) influencia diferentemente as métricas de qualidade
-- **Correlação com práticas DevOps:** Relacionar frequência de releases com adoção de práticas de integração contínua
-
-#### 8.4.4 Para RQ04 - Tamanho vs Qualidade
-- **Estudo arquitetural por tamanho:** Investigar se diferentes padrões arquiteturais (monolítico vs modular) influenciam a relação tamanho-qualidade
-- **Análise de crescimento sustentável:** Investigar estratégias que permitem crescimento de LOC sem degradação proporcional da qualidade
-
-#### 8.4.5 Sugestões gerais
-**Aprofundamento metodológico:**
-- **Análise temporal:** Estudar evolução das métricas CK ao longo do ciclo de vida dos repositórios
-- **Métricas complementares:** Incluir métricas de testabilidade, documentação e complexidade ciclomática
-- **Análise multivariada:** Aplicar PCA para identificar padrões latentes entre múltiplas métricas
-
-**Expansão do escopo:**
-- **Diversidade linguística:** Comparar padrões entre Java, Python, JavaScript e outras linguagens populares
-- **Segmentação por domínio:** Analisar frameworks, bibliotecas e aplicações separadamente
-- **Inclusão de repositórios médios:** Expandir análise para repositórios com 100-3.000 estrelas
-
-**Ferramentas e automação:**
-- **Dashboard interativo:** Desenvolver interface web para exploração dinâmica das correlações
-- **Predição de qualidade:** Implementar modelos ML para prever degradação de qualidade
-- **Guidelines baseadas em evidências:** Desenvolver recomendações específicas por faixa de popularidade/atividade
-- 
 ---
 
 ## 9. Referências
@@ -442,11 +404,5 @@ Liste as referências bibliográficas ou links utilizados.
 - [GitHub API Documentation](https://docs.github.com/en/graphql)
 - [CK Metrics Tool](https://ckjm.github.io/)
 - [Biblioteca Pandas](https://pandas.pydata.org/)
----
-
-## 10. Apêndices
-- Scripts utilizados para coleta e análise de dados.
-- Consultas GraphQL ou endpoints REST.
-- Planilhas e arquivos CSV gerados.
 
 ---
