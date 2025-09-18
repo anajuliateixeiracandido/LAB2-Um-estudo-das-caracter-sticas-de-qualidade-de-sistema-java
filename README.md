@@ -28,7 +28,7 @@ Este laboratório tem como objetivo realizar uma análise detalhada das caracter
 
 - **IH02:** Repositórios mais maduros (ou seja, com maior idade) tendem a apresentar uma qualidade de código superior, como menor acoplamento entre objetos (CBO) e menor profundidade de herança (DIT), devido ao tempo de desenvolvimento e refinamento constante do código.
 
-- **IH03:** Repositórios mais ativos tendem a ter pior qualidade inicial, mas melhor organização ao longo do tempo devido ao desenvolvimento contínuo e refatorações.
+- **IH03:** Repositórios mais ativos tendem a ter melhor qualidade, devido ao desenvolvimento contínuo e refatorações.
   
 - **IH04:** Repositórios maiores, com mais linhas de código (LOC) e mais linhas de comentários, tendem a apresentar piores características de qualidade de código, como maior acoplamento entre objetos (CBO), maior profundidade de herança (DIT) e menor coesão de métodos (LCOM), devido à maior complexidade e dificuldade de manutenção associada a sistemas maiores.
 
@@ -83,6 +83,18 @@ As métricas de qualidade interna foram calculadas utilizando a ferramenta **CK 
 - **DIT:** Depth Inheritance Tree - profundidade da hierarquia  
 - **LCOM:** Lack of Cohesion of Methods - falta de coesão
 
+#### Métricas de Laboratório - Lab Metrics (LM)
+| Código | Métrica | Descrição |
+|--------|--------|-----------|
+| LM01 | Número de estrelas	 | Total de estrelas atribuídas ao repositório, indicando sua popularidade entre os usuários |
+| LM02 | Idade (em anos) de cada repositório coletado | Número de anos desde a criação do repositório, refletindo sua maturidade no tempo. |
+| LM03 | Número de Releases | Total de versões ou releases oficiais publicadas no repositório. |
+| LM04 | Linhas de código (LOC) e linhas de comentários | Total de linhas de código e linhas de comentários no repositório, indicando o tamanho e a qualidade da documentação do código. |
+| LM05 | Linhas de comentários | Total de linhas de comentários no repositório, indicando o tamanho e a qualidade da documentação do código. |
+| LM06 | CBO: Coupling between objects	 | Total de dependências que uma classe possui com outras classes, indicando o grau de acoplamento entre objetos |
+| LM07 | DIT: Depth Inheritance Tree	 |Profundidade de uma classe na hierarquia de herança, refletindo a complexidade da reutilização de código|
+| LM08 | LCOM: Lack of Cohesion of Methods	 | Grau de coesão entre os métodos de uma classe, indicando se a classe realiza funções relacionadas ou múltiplas responsabilidades |
+
 ### 4.4 Análise dos Dados
 
 Desenvolvemos **scripts Python adicionais** utilizando as bibliotecas **pandas** e **numpy** para análise estatística dos dados coletados. A análise seguiu as seguintes etapas:
@@ -105,8 +117,6 @@ Desenvolvemos **scripts Python adicionais** utilizando as bibliotecas **pandas**
 
 ## 5. Questões de pesquisa
 
-Liste as questões de pesquisa que guiaram o estudo, com suas métricas associadas:
-
 **Questões de Pesquisa - Research Questions (RQs):**
 
 | RQ   | Pergunta | Métrica utilizada | Código da Métrica |
@@ -119,26 +129,8 @@ Liste as questões de pesquisa que guiaram o estudo, com suas métricas associad
 ---
 
 ## 6. Resultados
-### 6.1 Métricas
 
-Inclua métricas relevantes de repositórios do GitHub, separando **métricas do laboratório** e **métricas adicionais trazidas pelo grupo**:
-
-#### Métricas de Laboratório - Lab Metrics (LM)
-| Código | Métrica | Descrição |
-|--------|--------|-----------|
-| LM01 | Número de estrelas	 | Total de estrelas atribuídas ao repositório, indicando sua popularidade entre os usuários |
-| LM02 | Idade (em anos) de cada repositório coletado | Número de anos desde a criação do repositório, refletindo sua maturidade no tempo. |
-| LM03 | Número de Releases | Total de versões ou releases oficiais publicadas no repositório. |
-| LM04 | Linhas de código (LOC) e linhas de comentários | Total de linhas de código e linhas de comentários no repositório, indicando o tamanho e a qualidade da documentação do código. |
-| LM05 | Linhas de comentários | Total de linhas de comentários no repositório, indicando o tamanho e a qualidade da documentação do código. |
-| LM06 | CBO: Coupling between objects	 | Total de dependências que uma classe possui com outras classes, indicando o grau de acoplamento entre objetos |
-| LM07 | DIT: Depth Inheritance Tree	 |Profundidade de uma classe na hierarquia de herança, refletindo a complexidade da reutilização de código|
-| LM08 | LCOM: Lack of Cohesion of Methods	 | Grau de coesão entre os métodos de uma classe, indicando se a classe realiza funções relacionadas ou múltiplas responsabilidades |
----
-
-### 6.2 Estatísticas Descritivas
-
-Apresente as estatísticas descritivas das métricas analisadas, permitindo uma compreensão mais detalhada da distribuição dos dados.
+### 6.1 Estatísticas Descritivas
 
 | Métrica | Código | Média | Mediana | Moda | Desvio Padrão | Mínimo | Máximo | 
 |---------|--------|------|--------|-----|---------------|--------|--------|
@@ -151,8 +143,8 @@ Apresente as estatísticas descritivas das métricas analisadas, permitindo uma 
 | DIT: Depth Inheritance Tree	 | LM07 | 1,460259336| 1,39| 1 |0,3690244713| 1 | 5,71|
 | LCOM: Lack of Cohesion of Methods	 | LM08 |118,7377801 | 23,75| 0 | 1785,655144 |0  | 55203,28|
 
-### 6.3 Análises
-### 6.3.1 RQ01 — Popularidade x Qualidade
+### 6.2 Análises
+### 6.2.1 RQ01 — Popularidade x Qualidade
 
 | Popularidade            | CBO (mean) | CBO (median) | CBO (std) | DIT (mean) | DIT (median) | DIT (std) | LCOM (mean) | LCOM (median) | LCOM (std) |
 |-------------------------|------------|--------------|-----------|------------|--------------|-----------|-------------|---------------|------------|
@@ -165,13 +157,9 @@ Apresente as estatísticas descritivas das métricas analisadas, permitindo uma 
 - **DIT:** também reduz nos mais populares (1.47 → 1.19), sugerindo hierarquias mais simples.  
 - **LCOM:** comportamento não-linear, com pico nos “muito populares”, mas queda nos “extremamente populares”.  
 
-**Conclusão**  
-- Rejeita-se **H₀** para **CBO** e **DIT**.  
-- Repositórios extremamente populares apresentam **melhor qualidade estrutural** (menor acoplamento e hierarquias menos profundas).  
-- **Hipótese parcialmente confirmada:** popularidade extrema está associada a melhor qualidade.  
-- **Insight:** há um “ponto ótimo” de popularidade em que a qualidade estrutural é maximizada.  
+<img src="graficos/rq01_popularidade_vs_qualidade.png"/>
 
-#### 6.3.2 RQ02 (Maturidade x Qualidade)
+#### 6.2.2 RQ02 (Maturidade x Qualidade)
 **Pergunta:** Qual a relação entre a maturidade (idade) dos repositórios e suas características de qualidade?
 
 **Hipótese Informal:** Repositórios mais maduros (ou seja, com maior idade) tendem a apresentar uma qualidade de código superior, como menor acoplamento entre objetos (CBO) e menor profundidade de herança (DIT), devido ao tempo de desenvolvimento e refinamento constante do código.
@@ -224,12 +212,7 @@ A análise visual dos gráficos de dispersão reforça esses resultados. O gráf
 - **DIT:** crescimento moderado (1.38 → 1.52), sugerindo hierarquias ligeiramente mais complexas.  
 - **LCOM:** comportamento interessante — alto em projetos inativos (218.96), reduz nos com atividade moderada, e cresce de forma gradual nos mais ativos.  
 
-**Conclusão**  
-- Rejeita-se **H₀** para todas as métricas.  
-- Repositórios mais ativos apresentam **maior complexidade estrutural**, mas **melhor coesão** em comparação com os abandonados.  
-- **Hipótese confirmada:** atividade contínua aumenta a complexidade, mas evita degradação da coesão.  
-- **Insight:** projetos abandonados tendem a deteriorar em coesão, enquanto a manutenção contínua, mesmo com maior acoplamento, preserva a qualidade estrutural.  
-
+<img src="graficos/rq03_atividade_vs_qualidade.png"/>
 
 #### 6.3.4 RQ04 (Tamanho x Qualidade)
 **Pergunta**: Qual a relação entre o tamanho dos repositórios e suas características de qualidade?
@@ -306,6 +289,12 @@ Ele usa cores para mostrar a força e a direção das correlações entre as mé
 ### 7.1 RQ01 - Popularidade vs Qualidade
 
 #### 7.1.1 Confirmação ou refutação das hipóteses
+**Conclusão**  
+- Rejeita-se **H₀** para **CBO** e **DIT**.  
+- Repositórios extremamente populares apresentam **melhor qualidade estrutural** (menor acoplamento e hierarquias menos profundas).  
+- **Hipótese parcialmente confirmada:** popularidade extrema está associada a melhor qualidade.  
+- **Insight:** há um “ponto ótimo” de popularidade em que a qualidade estrutural é maximizada.  
+
 Nossa hipótese informal de que "repositórios mais populares tendem a apresentar melhor qualidade devido a mais contribuições e revisões" foi **parcialmente confirmada**, mas com nuances importantes. Os repositórios extremamente populares (>50.000 estrelas) apresentaram significativa melhoria na qualidade estrutural, com CBO reduzindo de 5.40 para 3.03 e DIT de 1.47 para 1.19. Isso confirma que projetos de grande visibilidade tendem a ter arquiteturas mais desacopladas e hierarquias mais simples.
 
 #### 7.1.2 Explicações para resultados divergentes
@@ -334,6 +323,12 @@ A correlação de Pearson entre a idade e o DIT foi de r=0.1809, uma correlaçã
 ### 7.3 RQ03 - Atividade vs Qualidade
 
 #### 7.3.1 Confirmação ou refutação das hipóteses
+**Conclusão**  
+- Rejeita-se **H₀** para todas as métricas.  
+- Repositórios mais ativos apresentam **maior complexidade estrutural**, mas **melhor coesão** em comparação com os abandonados.  
+- **Hipótese confirmada:** atividade contínua aumenta a complexidade, mas evita degradação da coesão.  
+- **Insight:** projetos abandonados tendem a deteriorar em coesão, enquanto a manutenção contínua, mesmo com maior acoplamento, preserva a qualidade estrutural.  
+
 Nossa hipótese de que "repositórios mais ativos teriam pior qualidade inicial, mas melhor organização ao longo do tempo" foi **parcialmente refutada**. Os dados mostram que repositórios mais ativos apresentam consistentemente maior acoplamento (CBO crescendo de 4.52 para 6.41) e maior complexidade estrutural. Contudo, a hipótese foi confirmada no aspecto da coesão: projetos inativos apresentaram LCOM extremamente alto (218.96), indicando que o abandono deteriora significativamente a coesão do código.
 
 #### 7.3.2 Explicações para resultados divergentes
