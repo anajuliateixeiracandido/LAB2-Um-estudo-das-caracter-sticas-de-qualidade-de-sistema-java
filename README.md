@@ -54,9 +54,9 @@ Este laboratório tem como objetivo realizar uma análise detalhada das caracter
 
 ## 3. Tecnologias e ferramentas utilizadas
 - **Linguagem de Programação:** Python
-- **Frameworks/Bibliotecas:** [Ex.: Pandas, Matplotlib, Seaborn, CK]
+- **Frameworks/Bibliotecas:** pandas, numpy, scipy, matplotlib, seaborn, requests, ck
 - **APIs utilizadas:** GitHub REST API
-- **Dependências:** requests, csv, time, os, subprocess, shutil, math, threading, json, platform, datetime, pathlib, concurrent.futures, re
+- **Dependências:** csv, json, os, subprocess, shutil, platform, threading, concurrent.futures, pathlib, datetime, time, re, math
 
 ---
 
@@ -79,17 +79,19 @@ Para cada repositório coletado, extraímos as seguintes métricas de processo d
 
 As métricas de qualidade interna foram calculadas utilizando a ferramenta **CK (Chidamber and Kemerer)**, que realiza análise estática do código Java. As métricas analisadas foram:
 
-- **CBO:** Coupling Between Objects
-- **DIT:** Depth Inheritance Tree  
-- **LCOM:** Lack of Cohesion of Methods
+- **CBO:** Coupling Between Objects - acoplamento entre classes
+- **DIT:** Depth Inheritance Tree - profundidade da hierarquia  
+- **LCOM:** Lack of Cohesion of Methods - falta de coesão
 
 ### 4.4 Análise dos Dados
 
 Desenvolvemos **scripts Python adicionais** utilizando as bibliotecas **pandas** e **numpy** para análise estatística dos dados coletados. A análise seguiu as seguintes etapas:
 
 1. **Agrupamento dos repositórios:** Dividimos os repositórios em faixas baseadas nas métricas de processo:
-- **RQ1:** Optamos por faixas logarítmicas em vez de tercis devido à **distribuição exponencial**. Esta abordagem evita agrupar repositórios de 40.000 estrelas com outros de 150.000 estrelas, que representam diferentes níveis de impacto na comunidade. Os limites foram definidos baseados em estudos prévios sobre popularidade em repositórios open-source e na distribuição natural dos nossos dados.
-- **RQ3:** Separamos explicitamente repositórios **inativos** (0 releases). As demais faixas foram definidas considerando práticas comuns de versionamento em projetos Java, onde releases frequentes (>50) indicam alta atividade de desenvolvimento, enquanto 1-10 releases sugerem projetos em estágio inicial ou com baixa cadência de atualizações.
+- **RQ01:** Optamos por faixas logarítmicas em vez de tercis devido à **distribuição exponencial**. Esta abordagem evita agrupar repositórios de 40.000 estrelas com outros de 150.000 estrelas, que representam diferentes níveis de impacto na comunidade. Os limites foram definidos baseados em estudos prévios sobre popularidade em repositórios open-source e na distribuição natural dos nossos dados.
+- **RQ02:** Categorizamos a maturidade em quatro grupos baseados na idade: Jovem (0-3 anos), Médio (3-7 anos), Maduro (7-12 anos) e Muito Maduro (12+ anos). Esta divisão permite análise tanto categórica quanto de correlação contínua com as métricas CBO e DIT.
+- **RQ03:** Separamos explicitamente repositórios **inativos** (0 releases). As demais faixas foram definidas considerando práticas comuns de versionamento em projetos Java, onde releases frequentes (>50) indicam alta atividade de desenvolvimento, enquanto 1-10 releases sugerem projetos em estágio inicial ou com baixa cadência de atualizações.
+- **RQ04:** Utilizamos quartis para criar categorias equilibradas de tamanho baseadas em LOC: Pequeno (Q1), Médio (Q2), Grande (Q3) e Muito Grande (Q4). Esta abordagem garante distribuição uniforme entre grupos e permite análise robusta das correlações entre tamanho e qualidade.
 
 2. **Análise estatística:** Para cada grupo, calculamos média, mediana e desvio padrão das métricas de qualidade (CBO, DIT, LCOM).
 
@@ -117,11 +119,6 @@ Liste as questões de pesquisa que guiaram o estudo, com suas métricas associad
 ---
 
 ## 6. Resultados
-
-Apresente os resultados obtidos, com tabelas e gráficos sempre que possível.
-
----
-
 ### 6.1 Métricas
 
 Inclua métricas relevantes de repositórios do GitHub, separando **métricas do laboratório** e **métricas adicionais trazidas pelo grupo**:
@@ -153,8 +150,6 @@ Apresente as estatísticas descritivas das métricas analisadas, permitindo uma 
 | CBO: Coupling between objects	| LM06 | 5,352302905|5,315 |  0|1,873299378| 0 |21,93 |
 | DIT: Depth Inheritance Tree	 | LM07 | 1,460259336| 1,39| 1 |0,3690244713| 1 | 5,71|
 | LCOM: Lack of Cohesion of Methods	 | LM08 |118,7377801 | 23,75| 0 | 1785,655144 |0  | 55203,28|
-
-> Dica: Inclua gráficos como histogramas ou boxplots junto com essas estatísticas para facilitar a interpretação.
 
 ### 6.3 Análises
 ### 6.3.1 RQ01 — Popularidade x Qualidade
@@ -210,7 +205,7 @@ As correlações foram calculadas para quantificar a relação linear entre a id
    - P-valor: p = 1.54e-08
    - **Interpretação**: A correlação é fraca, mas estatisticamente significativa. Há uma leve tendência de que o DIT aumente com a idade dos repositórios.
 
-<img src="imagens/rq02.png"/>
+<img src="graficos/rq02.png"/>
 
 A análise visual dos gráficos de dispersão reforça esses resultados. O gráfico de Idade vs. CBO mostra uma linha de tendência quase horizontal, confirmando a ausência de uma relação linear, isso contradiz a ideia de que projetos mais maduros tendem a ter um acoplamento menor. Já o gráfico de Idade vs. DIT exibe uma linha de tendência com uma inclinação positiva, sugerindo que, com o tempo, a profundidade de herança tende a aumentar, ou seja, repositórios mais antigos tendem a ter uma profundidade de herança ligeiramente maior, o que vai diretamente contra a hipótese de que a maturidade levaria a uma herança mais simples.
 
@@ -294,7 +289,7 @@ Os resultados para a quantidade de comentários reforçam as conclusões anterio
 
 Podemos afirmar a analise acima com o mapa de calor a seguir:
 
-<img src="imagens/rq04.png"/>
+<img src="graficos/rq04.png"/>
 
 Ele usa cores para mostrar a força e a direção das correlações entre as métricas. As cores quentes (vermelho/laranja) indicam correlações positivas, enquanto as cores frias (azul) indicam correlações negativas. A intensidade da cor e o valor numérico em cada quadrado mostram quão forte é a relação.
 
@@ -326,7 +321,15 @@ Existe um padrão em U invertido na qualidade por popularidade. Repositórios po
 
 ### 7.2 RQ02 - Maturidade vs Qualidade
 
-*[Espaço reservado para análise da RQ02]*
+A análise estatística dos dados levou à **rejeição da hipótese informal (IH02)**. A expectativa de que repositórios mais maduros apresentariam menor acoplamento (CBO) e menor profundidade de herança (DIT) não foi suportada pela evidência empírica.
+
+#### Justificativas para a Rejeição:
+
+1. **Acoplamento entre Objetos (CBO):**:
+A correlação de Pearson entre a idade do repositório e o CBO foi de r=0.0038, um valor positivo e extremamente fraco. Com um p-valor de p=0.907, o resultado não é estatisticamente significativo. Este achado **contradiz a hipótese de que a maturidade levaria a um menor acoplamento.** Em vez de diminuir, o CBO permaneceu praticamente constante ao longo do tempo, indicando que a **idade do projeto não é um fator de redução do acoplamento entre objetos.**
+
+2. **Profundidade da Árvore de Herança (DIT):**:
+A correlação de Pearson entre a idade e o DIT foi de r=0.1809, uma correlação positiva fraca, mas que se mostrou estatisticamente significativa com um p-valor de p=1.54e−08. Esse resultado **contradiz diretamente a hipótese**. Em vez de apresentar uma menor profundidade de herança, **repositórios mais maduros tendem a ter uma hierarquia de herança significativamente maior e mais complexa com o tempo.**
 
 ### 7.3 RQ03 - Atividade vs Qualidade
 
@@ -351,7 +354,28 @@ A métrica DIT mostrou-se mais estável (variação de 1.38 a 1.52), sugerindo q
 
 ### 7.4 RQ04 - Tamanho vs Qualidade
 
-*[Espaço reservado para análise da RQ04]*
+A análise estatística dos dados levou à **confirmação da hipótese informal (IH04).** Todas as correlações observadas entre métricas de tamanho e indicadores de qualidade demonstraram direção positiva e significância estatística, confirmando a relação direta entre crescimento dimensional e deterioração da qualidade arquitetural.
+
+#### Evidências que suportam a hipótese:   
+1. **Acoplamento entre Objetos (CBO):**:
+ - Linhas de Código vs CBO: r = 0.2816, p = 4.99e-19 - **SUPORTA**
+ - Linhas de Comentários vs CBO: r = 0.2253, p = 1.48e-12 - **SUPORTA**
+
+As correlações entre LOC/Comentários vs. CBO são positivas e significativas (r = 0.2816 e r = 0.2253). Isso significa que, à medida que o tamanho do repositório aumenta, o CBO também aumenta. O resultado confirma a parte da sua hipótese que prevê um **acoplamento maior em sistemas maiores.**
+
+2. **Profundidade da Árvore de Herança (DIT):**:
+- Linhas de Códigovs DIT: r = 0.0870, p = 6.85e-03 - **SUPORTA**
+- Linhas de Comentários vs DIT: r = 0.0903, p = 5.01e-03 - **SUPORTA**
+
+As correlações entre LOC/Comentários vs. DIT são positivas e significativas (r = 0.0870 e r = 0.0903). Isso mostra que, **em projetos maiores, a profundidade de herança tende a ser maior.** Mesmo sendo correlações fracas, a significância estatística indica que essa relação não é aleatória e suporta a hipótese.
+
+3. **Falta de Coesão (LCOM)**
+- Linhas de Código vs LCOM: r = 0.0974, p = 2.46e-03 - **SUPORTA**
+- Linhas de Comentários vs LCOM: r = 0.0922, p = 4.17e-03 - **SUPORTA**
+
+As correlações entre LOC/Comentários vs. LCOM são positivas e significativas (r = 0.0974 e r = 0.0922). Isso significa que, **em projetos maiores, a falta de coesão aumenta.** Este é um dos resultados que mais fortemente suporta sua hipótese, pois uma coesão mais baixa é uma clara indicação de uma qualidade de código mais pobre.
+
+Em resumo, a correlação positiva em todas as métricas significa que as características que indicam pior qualidade de código (alto acoplamento, herança complexa e baixa coesão) crescem junto com o tamanho do repositório, validando a hipótese de que repositórios maiores tendem a ter uma qualidade de código inferior.
 
 ### 7.5 Limitações Gerais
 
@@ -373,7 +397,7 @@ A análise revelou que **todos os repositórios estudados já são altamente pop
 
 #### 8.1.2 RQ02 - Maturidade vs Qualidade
 
-*[Espaço reservado para conclusões da RQ02]*
+A maturidade temporal de repositórios Java não constitui fator determinante para melhor qualidade de código. Contrariamente às expectativas, repositórios mais maduros tendem a desenvolver maior complexidade estrutural (especialmente profundidade de herança), enquanto o acoplamento permanece inalterado. Este achado fundamental desafia premissas básicas sobre evolução de software e enfatiza que qualidade superior requer gestão ativa e deliberada, independentemente da idade do projeto. A passagem do tempo, por si só, não melhora a qualidade do código. Qualidade é resultado de decisões deliberadas e esforços proativos, não um subproduto natural da maturidade.
 
 #### 8.1.3 RQ03 - Atividade vs Qualidade
 **Descobertas relevantes:**
@@ -386,7 +410,7 @@ A análise revelou que **todos os repositórios estudados já são altamente pop
 
 #### 8.1.4 RQ04 - Tamanho vs Qualidade
 
-*[Espaço reservado para conclusões da RQ04]*
+A análise da relação entre o tamanho dos repositórios e a qualidade do código resultou na confirmação da hipótese informal (IH04). As evidências estatísticas demonstraram consistentemente que, à medida que os repositórios aumentam em tamanho (medido por LOC e comentários), suas métricas de qualidade tendem a se degradar. As correlações positivas e significativas com CBO (acoplamento), DIT (profundidade de herança) e LCOM (falta de coesão) indicam que projetos maiores são mais propensos a ter um código mais acoplado, com hierarquias mais complexas e classes menos coesas. Este achado reforça a ideia de que a complexidade e os desafios de manutenção são fatores que crescem de forma inerente com a escala do projeto.
 
 ### 8.2 Big numbers encontrados
 
@@ -414,16 +438,16 @@ A análise revelou que **todos os repositórios estudados já são altamente pop
 - **Estudo longitudinal:** Acompanhar a evolução da qualidade conforme repositórios ganham popularidade ao longo do tempo
 
 #### 8.4.2 Para RQ02 - Maturidade vs Qualidade
-
-*[Espaço reservado para sugestões da RQ02]*
+- **Análise de marcos temporais:** Investigar se eventos específicos (mudanças de linguagem, frameworks, liderança) influenciam a degradação da qualidade ao longo do tempo
+- **Comparação por gerações tecnológicas:** Analisar se repositórios criados em diferentes eras (pré-2010, 2010-2015, 2015+) seguem padrões distintos de evolução
 
 #### 8.4.3 Para RQ03 - Atividade vs Qualidade
 - **Análise de padrões de release:** Investigar se o tipo de release (major, minor, patch) influencia diferentemente as métricas de qualidade
 - **Correlação com práticas DevOps:** Relacionar frequência de releases com adoção de práticas de integração contínua
 
 #### 8.4.4 Para RQ04 - Tamanho vs Qualidade
-
-*[Espaço reservado para sugestões da RQ04]*
+- **Estudo arquitetural por tamanho:** Investigar se diferentes padrões arquiteturais (monolítico vs modular) influenciam a relação tamanho-qualidade
+- **Análise de crescimento sustentável:** Investigar estratégias que permitem crescimento de LOC sem degradação proporcional da qualidade
 
 #### 8.4.5 Sugestões gerais
 **Aprofundamento metodológico:**
@@ -448,8 +472,6 @@ Liste as referências bibliográficas ou links utilizados.
 - [GitHub API Documentation](https://docs.github.com/en/graphql)
 - [CK Metrics Tool](https://ckjm.github.io/)
 - [Biblioteca Pandas](https://pandas.pydata.org/)
-- [Power BI](https://docs.microsoft.com/en-us/power-bi/fundamentals/service-get-started)
-
 ---
 
 ## 10. Apêndices
