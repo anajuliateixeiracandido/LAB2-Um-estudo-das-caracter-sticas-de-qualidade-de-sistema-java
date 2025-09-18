@@ -152,10 +152,17 @@ Desenvolvemos **scripts Python adicionais** utilizando as bibliotecas **pandas**
 | Muito populares         | 5.33       | 5.44         | 2.01      | 1.45       | 1.38         | 0.44      | 343.80      | 26.95         | 3796.68    |
 | Extremamente populares  | 3.03       | 2.72         | 2.44      | 1.19       | 1.12         | 0.25      | 102.71      | 6.34          | 317.80     |
 
-**Análise**  
-- **CBO:** diminui significativamente nos repositórios extremamente populares (5.40 → 3.03), indicando menor acoplamento.  
-- **DIT:** também reduz nos mais populares (1.47 → 1.19), sugerindo hierarquias mais simples.  
-- **LCOM:** comportamento não-linear, com pico nos “muito populares”, mas queda nos “extremamente populares”.  
+- **CBO:** Diminui significativamente nos repositórios extremamente populares (de 5.40 para 3.03), indicando menor acoplamento.
+- **DIT:** Também reduz nos mais populares (de 1.47 para 1.19), sugerindo hierarquias mais simples.
+- **LCOM:** Apresenta comportamento não-linear, com pico nos “muito populares” (343.80) e queda nos “extremamente populares” (102.71).
+
+O gráfico mostra que, à medida que a popularidade aumenta, há uma redução acentuada do acoplamento (**CBO**) e da profundidade das hierarquias (**DIT**) nos repositórios extremamente populares. Isso sugere que esses projetos, por receberem mais contribuições, revisões e atenção da comunidade, conseguem amadurecer suas arquiteturas, tornando-as mais desacopladas e simples.
+
+O **LCOM**, porém, revela um padrão interessante: ele cresce drasticamente nos “muito populares”, indicando perda de coesão possivelmente devido ao crescimento rápido e desorganizado, mas volta a cair nos “extremamente populares”, sugerindo que, após uma fase de expansão, esses projetos passam por refatorações e melhorias estruturais que restauram a coesão.
+
+- Existe um “ponto de inflexão” na popularidade, onde a qualidade estrutural pode piorar antes de melhorar novamente.
+- Projetos extremamente populares são os que apresentam melhor qualidade estrutural (menor acoplamento e hierarquia mais simples), enquanto os muito populares podem passar por uma fase de “crescimento desordenado”.
+- O **LCOM** evidencia que o excesso de popularidade sem maturidade pode comprometer temporariamente a coesão do código. 
 
 <img src="graficos/rq01_popularidade_vs_qualidade.png"/>
 
@@ -207,10 +214,15 @@ A análise visual dos gráficos de dispersão reforça esses resultados. O gráf
 | Média atividade  | 5.63       | 5.57         | 1.41      | 1.50       | 1.42         | 0.41      | 69.10       | 29.32         | 234.53     |
 | Alta atividade   | 6.41       | 6.33         | 1.95      | 1.52       | 1.48         | 0.31      | 77.69       | 36.11         | 182.08     |
 
-**Análise**  
-- **CBO:** aumenta consistentemente com a atividade (4.52 → 6.41), indicando maior acoplamento em projetos mais ativos.  
-- **DIT:** crescimento moderado (1.38 → 1.52), sugerindo hierarquias ligeiramente mais complexas.  
-- **LCOM:** comportamento interessante — alto em projetos inativos (218.96), reduz nos com atividade moderada, e cresce de forma gradual nos mais ativos.  
+- **CBO:** Aumenta consistentemente com a atividade (de 4.52 para 6.41), indicando maior acoplamento em projetos mais ativos.
+- **DIT:** Crescimento moderado (de 1.38 para 1.52), sugerindo hierarquias ligeiramente mais complexas.
+- **LCOM:** Alto em projetos inativos (218.96), reduz drasticamente em projetos com alguma atividade (66.95 a 69.10), e cresce gradualmente nos mais ativos (77.69).
+
+O gráfico evidencia que a atividade contínua é fundamental para preservar a coesão do código: projetos inativos apresentam **LCOM** muito alto, indicando deterioração estrutural. Com o aumento da atividade, o **LCOM** cai fortemente, mostrando que a manutenção e evolução do código restauram a coesão. Entretanto, à medida que a atividade se intensifica, o acoplamento (**CBO**) aumenta, sugerindo que o desenvolvimento acelerado e a inclusão de novas funcionalidades acabam por aumentar as dependências entre componentes. O **DIT**, por sua vez, se mantém relativamente estável, indicando que a profundidade das hierarquias de herança não é tão sensível à atividade.
+
+- A manutenção contínua é fundamental para preservar a coesão do código, evitando a deterioração típica de projetos abandonados.
+- O aumento da atividade, embora positivo para a coesão, está associado a maior acoplamento, sugerindo um trade-off entre evolução funcional e qualidade arquitetural.
+- A métrica **DIT** é a mais estável, indicando que as decisões sobre herança não variam tanto com a atividade. 
 
 <img src="graficos/rq03_atividade_vs_qualidade.png"/>
 
@@ -289,24 +301,14 @@ Ele usa cores para mostrar a força e a direção das correlações entre as mé
 ### 7.1 RQ01 - Popularidade vs Qualidade
 
 #### 7.1.1 Confirmação ou refutação das hipóteses
-**Conclusão**  
-- Rejeita-se **H₀** para **CBO** e **DIT**.  
-- Repositórios extremamente populares apresentam **melhor qualidade estrutural** (menor acoplamento e hierarquias menos profundas).  
-- **Hipótese parcialmente confirmada:** popularidade extrema está associada a melhor qualidade.  
-- **Insight:** há um “ponto ótimo” de popularidade em que a qualidade estrutural é maximizada.  
+- **Hipótese informal (IH01):** Repositórios mais populares tendem a apresentar melhor qualidade de código, pois recebem mais contribuições, revisões e atenção da comunidade.
+- **Hipótese formal (H0₁/H1₁):** Existe diferença significativa nas métricas de qualidade entre níveis de popularidade.
 
-Nossa hipótese informal de que "repositórios mais populares tendem a apresentar melhor qualidade devido a mais contribuições e revisões" foi **parcialmente confirmada**, mas com nuances importantes. Os repositórios extremamente populares (>50.000 estrelas) apresentaram significativa melhoria na qualidade estrutural, com CBO reduzindo de 5.40 para 3.03 e DIT de 1.47 para 1.19. Isso confirma que projetos de grande visibilidade tendem a ter arquiteturas mais desacopladas e hierarquias mais simples.
+**Confirmação das hipóteses:**
+- Os dados rejeitam **H0₁** para **CBO** e **DIT**. Repositórios extremamente populares apresentam menor acoplamento e hierarquias mais simples, confirmando parcialmente a hipótese informal **IH01**.
+- No entanto, o comportamento não-linear do **LCOM** mostra que nem sempre o aumento da popularidade resulta em melhor qualidade: há uma fase intermediária (muito populares) em que a coesão do código pode se deteriorar antes de ser restaurada nos projetos mais maduros e populares.
 
-#### 7.1.2 Explicações para resultados divergentes
-**Comportamento não-linear do LCOM na análise de popularidade:**
-O resultado inesperado foi que repositórios muito populares apresentaram valores extremamente altos de LCOM (343.80), enquanto os extremamente populares voltaram a níveis moderados (102.71). Possíveis explicações:
-- **Efeito threshold:** Projetos que atingem popularidade extrema passam por processos rigorosos de refatoração e reestruturação
-- **Seleção natural:** Apenas projetos com arquitetura sustentável conseguem manter popularidade extrema a longo prazo
-- **Recursos disponíveis:** Projetos extremamente populares têm mais recursos para investir em qualidade de código
-
-#### 7.1.3 Padrões e insights interessantes
-**Insight - "Sweet Spot" de Popularidade:**
-Existe um padrão em U invertido na qualidade por popularidade. Repositórios populares (3.000-10.000 estrelas) e extremamente populares (>50.000) apresentam melhor qualidade que os muito populares (10.000-50.000). Isso sugere uma "zona crítica" onde projetos crescem rapidamente, mas ainda não desenvolveram processos maduros de governança.
+- Existe um “sweet spot” de popularidade, onde a qualidade estrutural é maximizada. Projetos entre 10.000-50.000 estrelas tendem a ter pior qualidade, sugerindo uma fase de crescimento descontrolado antes de atingirem maturidade arquitetural.
 
 ### 7.2 RQ02 - Maturidade vs Qualidade
 
@@ -321,31 +323,15 @@ A correlação de Pearson entre a idade do repositório e o CBO foi de r=0.0038,
 A correlação de Pearson entre a idade e o DIT foi de r=0.1809, uma correlação positiva fraca, mas que se mostrou estatisticamente significativa com um p-valor de p=1.54e−08. Esse resultado **contradiz diretamente a hipótese**. Em vez de apresentar uma menor profundidade de herança, **repositórios mais maduros tendem a ter uma hierarquia de herança significativamente maior e mais complexa com o tempo.**
 
 ### 7.3 RQ03 - Atividade vs Qualidade
+- **Hipótese informal (IH03):** Repositórios mais ativos tendem a ter melhor qualidade, devido ao desenvolvimento contínuo e refatorações.
+- **Hipótese formal (H0₃/H1₃):** Existe diferença significativa nas métricas de qualidade entre níveis de atividade.
 
-#### 7.3.1 Confirmação ou refutação das hipóteses
-**Conclusão**  
-- Rejeita-se **H₀** para todas as métricas.  
-- Repositórios mais ativos apresentam **maior complexidade estrutural**, mas **melhor coesão** em comparação com os abandonados.  
-- **Hipótese confirmada:** atividade contínua aumenta a complexidade, mas evita degradação da coesão.  
-- **Insight:** projetos abandonados tendem a deteriorar em coesão, enquanto a manutenção contínua, mesmo com maior acoplamento, preserva a qualidade estrutural.  
+**Confirmação das hipóteses:**
+- Os dados rejeitam **H0₃** para todas as métricas. Projetos mais ativos apresentam maior acoplamento (**CBO**), contrariando a expectativa da hipótese informal **IH03** de que a atividade levaria a melhor qualidade geral.
+- No entanto, a coesão (**LCOM**) é significativamente melhor em projetos ativos do que em inativos, confirmando que a manutenção contínua é essencial para evitar a deterioração estrutural.
+- O **DIT** se mantém estável, mostrando que a complexidade das hierarquias de herança não é tão impactada pela atividade.
 
-Nossa hipótese de que "repositórios mais ativos teriam pior qualidade inicial, mas melhor organização ao longo do tempo" foi **parcialmente refutada**. Os dados mostram que repositórios mais ativos apresentam consistentemente maior acoplamento (CBO crescendo de 4.52 para 6.41) e maior complexidade estrutural. Contudo, a hipótese foi confirmada no aspecto da coesão: projetos inativos apresentaram LCOM extremamente alto (218.96), indicando que o abandono deteriora significativamente a coesão do código.
-
-#### 7.3.2 Explicações para resultados divergentes
-**Aumento do acoplamento com atividade:**
-O crescimento consistente do CBO com atividade contraria a expectativa de melhor qualidade. Possíveis causas:
-- **Crescimento funcional:** Projetos mais ativos naturalmente adicionam mais funcionalidades, aumentando dependências
-- **Pressão de entrega:** Releases frequentes podem priorizar funcionalidade sobre arquitetura ideal
-- **Complexidade evolutiva:** Projetos maduros acumulam dependências históricas difíceis de refatorar
-
-#### 7.3.3 Padrões e insights interessantes
-**Insight - Abandono vs Atividade Excessiva:**
-Ambos os extremos (projetos inativos e altamente ativos) apresentam problemas de qualidade, mas de naturezas diferentes:
-- **Projetos inativos:** Deterioração da coesão (LCOM alto = 218.96)
-- **Projetos hiperativos:** Aumento do acoplamento (CBO alto = 6.41)
-
-**Insight - Estabilidade da Herança:**
-A métrica DIT mostrou-se mais estável (variação de 1.38 a 1.52), sugerindo que decisões arquiteturais sobre hierarquia de herança são mais resistentes a mudanças relacionadas à atividade.
+- Projetos abandonados deterioram em coesão, enquanto os ativos acumulam complexidade estrutural. A atividade contínua, embora aumente o acoplamento, é fundamental para manter a coesão e evitar a degradação do código.
 
 ### 7.4 RQ04 - Tamanho vs Qualidade
 
@@ -383,25 +369,14 @@ A análise revelou que **todos os repositórios estudados já são altamente pop
 ### 8.1 Principais insights por questão de pesquisa
 
 #### 8.1.1 RQ01 - Popularidade vs Qualidade
-**Descobertas relevantes:**
-- **Efeito não-linear da popularidade:** Repositórios extremamente populares (>50.000 estrelas) apresentam arquiteturas significativamente mais desacopladas (CBO = 3.03) comparados aos muito populares (CBO = 5.33)
-- **Zona crítica de popularidade:** Projetos na faixa de 10.000-50.000 estrelas apresentam pior qualidade estrutural, sugerindo uma fase de crescimento descontrolado
-
-**Confirmação das hipóteses:**
-- **Confirmada:** Projetos extremamente populares têm melhor qualidade estrutural (CBO e DIT menores)
+Projetos extremamente populares apresentam melhor qualidade estrutural, com menor acoplamento (CBO) e hierarquias mais simples (DIT). No entanto, há uma faixa intermediária de popularidade em que a qualidade pode se deteriorar temporariamente, indicando a necessidade de processos de maturação e refatoração para sustentar o crescimento.
 
 #### 8.1.2 RQ02 - Maturidade vs Qualidade
 
 A maturidade temporal de repositórios Java não constitui fator determinante para melhor qualidade de código. Contrariamente às expectativas, repositórios mais maduros tendem a desenvolver maior complexidade estrutural (especialmente profundidade de herança), enquanto o acoplamento permanece inalterado. Este achado fundamental desafia premissas básicas sobre evolução de software e enfatiza que qualidade superior requer gestão ativa e deliberada, independentemente da idade do projeto. A passagem do tempo, por si só, não melhora a qualidade do código. Qualidade é resultado de decisões deliberadas e esforços proativos, não um subproduto natural da maturidade.
 
 #### 8.1.3 RQ03 - Atividade vs Qualidade
-**Descobertas relevantes:**
-- **Trade-off atividade-acoplamento:** Maior atividade correlaciona fortemente com maior acoplamento, sugerindo que desenvolvimento intenso compromete a arquitetura
-- **Deterioração por abandono:** Repositórios inativos apresentam os piores valores de coesão (LCOM = 218.96), confirmando que manutenção contínua é crucial
-
-**Confirmação das hipóteses:**
-- **Parcialmente confirmada:** Atividade melhora coesão comparado ao abandono, mas aumenta acoplamento
-- **Refutada:** Projetos mais ativos não necessariamente têm melhor qualidade geral
+Projetos mais ativos mantêm melhor coesão (LCOM) em comparação aos inativos, mas acumulam maior acoplamento (CBO). A manutenção contínua é essencial para evitar a deterioração estrutural, mesmo que isso traga aumento de complexidade.
 
 #### 8.1.4 RQ04 - Tamanho vs Qualidade
 
