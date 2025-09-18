@@ -68,8 +68,8 @@ def plot_rq01(df):
     handles2, labels2 = ax2.get_legend_handles_labels()
     ax1.legend(handles1 + handles2, labels1 + labels2, loc='upper right', fontsize=13)
     plt.tight_layout()
-    plt.savefig('imagens/rq01_popularidade_vs_qualidade.png', dpi=300)
-    plt.savefig('imagens/rq01_popularidade_vs_qualidade.pdf', dpi=300)
+    plt.savefig('graficos/rq01_popularidade_vs_qualidade.png', dpi=300)
+    plt.savefig('graficos/rq01_popularidade_vs_qualidade.pdf', dpi=300)
     plt.close()
 
 def plot_rq03(df):
@@ -98,8 +98,8 @@ def plot_rq03(df):
     lines2, labels2 = ax2.get_legend_handles_labels()
     ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left', fontsize=13)
     plt.tight_layout()
-    plt.savefig('imagens/rq03_atividade_vs_qualidade.png', dpi=300)
-    plt.savefig('imagens/rq03_atividade_vs_qualidade.pdf', dpi=300)
+    plt.savefig('graficos/rq03_atividade_vs_qualidade.png', dpi=300)
+    plt.savefig('graficos/rq03_atividade_vs_qualidade.pdf', dpi=300)
     plt.close()
 
 def main():
